@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 
 import PraiaFundo from './components/PraiaFundo'
-import BemVindoMenu from './components/BemVindoMenu'
+import BemVindoMenu from './components/BemVindoLogin'
 
 const ImgPraia = require('./images/desenho_praia.png');
 
