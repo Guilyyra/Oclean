@@ -4,7 +4,7 @@ export default StyleSheet.create({
 
     // WELCOME
     welcomeWrapper:{
-        height: "70%",
+        height: "68%",
     },
     logo: {
         width: 100,
@@ -41,6 +41,31 @@ export default StyleSheet.create({
         marginBottom: 12,
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "row",
+
+        backgroundColor: "#63E1FD",
+        borderRadius: 10,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 11,
+        },
+        shadowOpacity: 0.57,
+        shadowRadius: 15.19,
+
+        elevation: 23,
+
+            
+    },
+    signupButton: {
+        width: "70%",
+        padding: 5,
+        paddingLeft: 24,
+        marginTop: 24,
+        marginBottom: 12,
+        alignItems: "center",
+        flexDirection: "row",
 
         backgroundColor: "#63E1FD",
         borderRadius: 10,
