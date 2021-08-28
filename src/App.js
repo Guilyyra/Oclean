@@ -10,7 +10,6 @@ export default() => (
     <View style={style.container}>
         <ImageBackground source={ImgPraia} resizeMode="cover" style={style.image}>
             <BemVindoMenu />
-            <Text>Aoba</Text>
         </ImageBackground>
     </View>
 )
