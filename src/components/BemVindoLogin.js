@@ -5,7 +5,7 @@ import Input from './Input'
 import estilo from './estilo';
 import Btn from './Btn'
 
-const ImgLogo = require('../images/oclean_logo.png');
+const ImgLogo = require('../img/oclean_logo.png');
 
 export default () => {
 

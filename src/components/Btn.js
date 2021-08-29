@@ -1,24 +1,45 @@
 import React from 'react'
-import { Text,  Image, TouchableOpacity } from 'react-native'
+import { Text,  Image, TouchableOpacity, StyleSheet } from 'react-native'
 
-import estilo from './estilo';
+export default props => {
+    const titulo = props.titulo || "Clique aqui!"
+    const largura = props.largura || "70%"
+    const altura = props.altura || null
+    const tamanhoTexto = props.tamanhoTexto || 24
 
-
-
-export default ({ titulo }) => {
+    const medidas = {
+        width: largura,
+        height: altura
+    }
 
     return (
-        <TouchableOpacity style={estilo.welcomeButton}>
-            <Text style={estilo.welcomeTitle}>{titulo}</Text>
-        </TouchableOpacity>
-    )
-}
-export function BtnSignup({titulo, Img, ImgSize}){
-    return(
-        <TouchableOpacity style={estilo.signupButton}>
-            <Image source={Img} style={{height: ImgSize, width: ImgSize, marginRight: 18}}/>
-            <Text style={estilo.welcomeTitle}>{titulo}</Text>
+        <TouchableOpacity style={[style.button,medidas]}>
+            <Text style={{fontSize: tamanhoTexto, color: "white"}}>{titulo}</Text>
         </TouchableOpacity>
     )
 }
 
+const style = StyleSheet.create({
+    button: {
+        padding: 5,
+        marginTop: 24,
+        marginBottom: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+
+        backgroundColor: "#63E1FD",
+        borderRadius: 10,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 11,
+        },
+        shadowOpacity: 0.57,
+        shadowRadius: 15.19,
+
+        elevation: 23,
+            
+    },
+})

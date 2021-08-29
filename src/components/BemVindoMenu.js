@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, Image } from 'react-native'
 import Btn from './Btn'
 import estilo from './estilo';
 
-const ImgLogo = require('../images/oclean_logo.png');
+const ImgLogo = require('../img/oclean_logo.png');
 
 export default () => {
 
