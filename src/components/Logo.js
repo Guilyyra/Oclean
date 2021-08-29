@@ -11,7 +11,7 @@ export default props => {
             source={ImgLogo} 
             style={{
                 width: largura,
-                height: altura                
+                height: altura               
             }}
             resizeMode="cover"
         />

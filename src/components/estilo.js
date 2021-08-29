@@ -1,12 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-
+    
+    // Geral
+    Flex1:{
+        flex: 1
+    },
     // Bem Vindo
     MenuContainer: {
         justifyContent: "center",
         alignItems: "center",
-        width: 250,
+        width: "70%",
         backgroundColor: "white",
         borderRadius: 20,
         paddingVertical: 16,
@@ -20,7 +24,6 @@ export default StyleSheet.create({
         shadowRadius: 15.19,
         elevation: 23
     },
-    //FIM - Bem Vindo
     // Login
     inputTitle:{
       width: "70%",
