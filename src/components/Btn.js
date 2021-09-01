@@ -41,12 +41,12 @@ const style = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 11,
+            height: 1,
         },
-        shadowOpacity: 0.57,
-        shadowRadius: 15.19,
-
-        elevation: 23,
+        shadowOpacity: 0.5,
+        shadowRadius: 16,
+        
+        elevation: 8,
             
     },
     btnTexto: {

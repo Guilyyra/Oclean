@@ -16,21 +16,24 @@ export default props => {
             <PraiaFundo>
                 <Menu>
                     <VoltarBtn 
-                        titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
+                        titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
                         navegacao={props.navigation}/>
+                        style={estilo.VoltarBtn} />
                     <Logo lado={150} />
                     <Text style={{color: "#333333", fontSize: 24, paddingTop: 16,paddingBottom: 24}}>Cadastro</Text>
                     
                     <Btn
+                        altura={"15%"}
                         svg={<MaterialIcons name="business" size={24} color="#fff" />}
                         titulo="ONG"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroONG")}}
                         marginVertical={16} />
                     <Btn
+                        altura={"15%"}
                         svg={<MaterialIcons name="directions-run" size={24} color="#fff" />}
                         titulo="Pessoa"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroPessoa")}}
-                        marginVertical={24} />
+                        marginVertical={20} />
                 </Menu>
             </PraiaFundo>
         </SafeAreaView>

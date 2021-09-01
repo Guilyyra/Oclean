@@ -14,9 +14,10 @@ export default StyleSheet.create({
     },
     // Bem Vindo, login e cadastro
     MenuContainer: {
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
         width: "90%",
+        height: "56%",
         backgroundColor: "white",
         borderRadius: 20,
         paddingVertical: 16,

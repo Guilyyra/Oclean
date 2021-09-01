@@ -4,14 +4,14 @@ import Estilo from './estilo'
 
 export default props => {
     const ImgLogo = require('../img/oclean_logo.png')
-    const lado = props.lado || 100
-
+    const largura = props.largura || 120
+    const altura = props.altura || 120
     return(
         <Image 
             source={ImgLogo} 
             style={{
-                width: lado,
-                height: lado               
+                width: largura,
+                height: altura               
             }}
             resizeMode="cover"
         />
