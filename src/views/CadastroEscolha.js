@@ -17,7 +17,7 @@ export default props => {
                 <Menu>
                     <VoltarBtn 
                         titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
-                        navegacao={props.navigation}/>
+                        navegacao={props.navigation}
                         style={estilo.VoltarBtn} />
                     <Logo lado={150} />
                     <Text style={{color: "#333333", fontSize: 24, paddingTop: 16,paddingBottom: 24}}>Cadastro</Text>
