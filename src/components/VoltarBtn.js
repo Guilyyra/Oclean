@@ -4,9 +4,10 @@ import { Text,  Image, TouchableOpacity, StyleSheet } from 'react-native'
 export default props => {
     const titulo = props.titulo || "Clique aqui!"
     const navegacao = props.navegacao
+    const funcao = props => {navegacao.goBack()}
 
     return (
-        <TouchableOpacity style={style.VoltarBtn} onPress={props => {navegacao.goBack()}} >
+        <TouchableOpacity style={style.VoltarBtn} onPress={ props.funcao || funcao} >
             <Text style={{fontSize: null, color: "white"}}>{titulo}</Text>
         </TouchableOpacity>
     )

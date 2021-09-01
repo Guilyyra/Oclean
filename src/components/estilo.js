@@ -6,11 +6,17 @@ export default StyleSheet.create({
     Flex1:{
         flex: 1
     },
-    // Bem Vindo
+    inputTitulo:{
+        alignSelf: "flex-start",
+        marginLeft: "10%",
+        fontSize: 18,
+        color: "rgba(50, 50, 50, 0.6)",
+    },
+    // Bem Vindo, login e cadastro
     MenuContainer: {
         justifyContent: "center",
         alignItems: "center",
-        width: "70%",
+        width: "90%",
         backgroundColor: "white",
         borderRadius: 20,
         paddingVertical: 16,
@@ -24,21 +30,13 @@ export default StyleSheet.create({
         shadowRadius: 15.19,
         elevation: 23
     },
-    // Login
-    inputTitle:{
-      width: "70%",
-      fontSize: 18,
-      color: "rgba(50, 50, 50, 0.6)",
-      marginBottom: 0,
+    MenuTitulo: {
+        color: "#333333",
+        fontSize: 24,
+        paddingTop: 16,
+        paddingBottom: 24
     },
     inputText:{
-        width: "70%",
+        width: "70%"
     },
-    input:{
-        width: "70%",
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: 'black',
-        marginBottom: 16,
-    }
 })

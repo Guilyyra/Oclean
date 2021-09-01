@@ -6,9 +6,10 @@ export default props => {
     const titulo = props.titulo || "Clique aqui!"
     const largura = props.largura || "70%"
     const altura = props.altura || null
-    const tamanhoTexto = props.tamanhoTexto || 24
+    const tamanhoFonte = props.tamanhoFonte || 24
     const funcaoPressionar = props.funcaoPressionar || null
     const marginVertical = props.marginVertical || null
+    const somenteTexto = props.somenteTexto || false
 
     const medidas = {
         width: largura,
@@ -17,9 +18,13 @@ export default props => {
     }
 
     return (
-        <TouchableOpacity style={[style.btn,medidas]} onPress={funcaoPressionar} >
+        <TouchableOpacity style={[somenteTexto ? style.btnTexto : style.btn,medidas]} onPress={funcaoPressionar} >
             <Text style={{position: "absolute", left: 16}}>{svg}</Text>
-            <Text style={{fontSize: tamanhoTexto, color: "white"}}>{titulo}</Text>
+            <Text 
+                style={[{fontSize: tamanhoFonte}, 
+                somenteTexto ? {color: "#63E1FD"} : {color: "white"}]}>
+                    {titulo}
+            </Text>
         </TouchableOpacity>
     )
 }
@@ -44,4 +49,10 @@ const style = StyleSheet.create({
         elevation: 23,
             
     },
+    btnTexto: {
+        padding: 5,
+        alignItems: "center",
+        justifyContent: "center",
+
+    }
 })
