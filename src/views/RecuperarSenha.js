@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, View, Text, KeyboardAvoidingView  } from 'react-native'
+import { SafeAreaView, View, Text  } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import estilo from '../components/estilo'
@@ -11,7 +11,6 @@ import Menu from '../components/Menu'
 import PraiaFundo from '../components/PraiaFundo'
 
 export default props => (
-    <KeyboardAvoidingView style={estilo.Flex1} behavior="behavior">
     <SafeAreaView style={estilo.Flex1}>
         <PraiaFundo>
             <Menu>
@@ -20,23 +19,14 @@ export default props => (
                     navegacao={props.navigation}
                     style={estilo.VoltarBtn} />
                 <Logo lado={150} />
-                <Text style={estilo.MenuTitulo}>Login</Text>
+                <Text style={estilo.MenuTitulo}>Esqueci minha senha</Text>
 
-                <Text style={estilo.inputTitulo}>Email:</Text>
+                <Text style={ estilo.menuSubTitulo }>Insira o seu email e enviaremos um link para recuperar sua senha</Text>
                 <Ipt placeholder="Email" largura="80%"/>
 
-                <Text style={estilo.inputTitulo}>Senha:</Text>
-                <Ipt placeholder="Senha" largura="80%" escondido={true} />
+                <Btn titulo="Recuperar Senha"  marginVertical={8} />
 
-                <Btn titulo="Entrar" largura="50%" marginVertical={8} />
-                <Btn 
-                        somenteTexto={true}
-                        tamanhoFonte={14} 
-                        titulo="Esqueci minha senha"
-                        marginVertical={8} 
-                        funcaoPressionar={() => props.navigation.navigate("RecuperarSenha")}/>
             </Menu>
         </PraiaFundo>
     </SafeAreaView>
-    </KeyboardAvoidingView>
 )

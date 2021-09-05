@@ -6,6 +6,7 @@ import CadastroEscolha from '../views/CadastroEscolha'
 import CadastroONG from '../views/CadastroONG'
 import CadastroPessoa from '../views/CadastroPessoa'
 import Login from '../views/Login'
+import RecuperarSenha from '../views/RecuperarSenha'
 
 const Stack = createNativeStackNavigator()
 
@@ -16,5 +17,6 @@ export default props => (
         <Stack.Screen name="CadastroONG" component={CadastroONG} />
         <Stack.Screen name="CadastroPessoa" component={CadastroPessoa} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
     </Stack.Navigator>
 )

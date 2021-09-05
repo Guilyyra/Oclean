@@ -14,7 +14,7 @@ export default props => {
                 <Menu>
                     <Logo lado={150} />
                     <Text style={[estilo.MenuTitulo, {paddingBottom: 0}]}>Bem Vindo!</Text>
-                    <Text style={{color: "#333333", fontSize: 14, textAlign: "center", paddingBottom: 32}}>
+                    <Text style={estilo.menuSubTitulo}>
                         Você escolheu ajudar a natureza usando Oclean!
                     </Text>
                     <Btn 

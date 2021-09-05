@@ -17,7 +17,7 @@ export default StyleSheet.create({
         justifyContent: "space-around",
         alignItems: "center",
         width: "90%",
-        height: "56%",
+        minHeight: "58%",
         backgroundColor: "white",
         borderRadius: 20,
         paddingVertical: 16,
@@ -35,7 +35,14 @@ export default StyleSheet.create({
         color: "#333333",
         fontSize: 24,
         paddingTop: 16,
-        paddingBottom: 24
+        paddingBottom: 0
+    },
+    menuSubTitulo:{
+        fontSize: 18,
+        color: "rgba(50, 50, 50, 0.6)",
+        textAlign: "center",
+        paddingLeft: 14,
+        paddingRight: 14,
     },
     inputText:{
         width: "70%"

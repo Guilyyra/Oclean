@@ -26,14 +26,12 @@ export default props => {
                         altura={"15%"}
                         svg={<MaterialIcons name="business" size={24} color="#fff" />}
                         titulo="ONG"
-                        funcaoPressionar={() => {props.navigation.navigate("CadastroONG")}}
-                        marginVertical={16} />
+                        funcaoPressionar={() => {props.navigation.navigate("CadastroONG")}}/>
                     <Btn
                         altura={"15%"}
                         svg={<MaterialIcons name="directions-run" size={24} color="#fff" />}
                         titulo="Pessoa"
-                        funcaoPressionar={() => {props.navigation.navigate("CadastroPessoa")}}
-                        marginVertical={20} />
+                        funcaoPressionar={() => {props.navigation.navigate("CadastroPessoa")}} />
                 </Menu>
             </PraiaFundo>
         </SafeAreaView>
