@@ -35,7 +35,7 @@ export default StyleSheet.create({
         color: "#333333",
         fontSize: 24,
         paddingTop: 16,
-        paddingBottom: 0
+        paddingBottom: 0,
     },
     menuSubTitulo:{
         fontSize: 18,

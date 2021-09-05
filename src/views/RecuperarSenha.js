@@ -18,8 +18,10 @@ export default props => (
                     titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
                     navegacao={props.navigation}
                     style={estilo.VoltarBtn} />
-                <Logo lado={150} />
-                <Text style={estilo.MenuTitulo}>Esqueci minha senha</Text>
+                <View style={{ height: "36%", justifyContent:"center",alignItems: "center"}}>
+                    <Logo lado={150} />
+                    <Text style={estilo.MenuTitulo}>Esqueci minha senha</Text>
+                </View>
 
                 <Text style={ estilo.menuSubTitulo }>Insira o seu email e enviaremos um link para recuperar sua senha</Text>
                 <Ipt placeholder="Email" largura="80%"/>

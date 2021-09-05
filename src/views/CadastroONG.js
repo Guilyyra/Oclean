@@ -18,8 +18,10 @@ export default props => (
                     titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
                     navegacao={props.navigation}
                     style={estilo.VoltarBtn} />
-                <Logo lado={150} />
-                <Text style={estilo.MenuTitulo}>Cadastro</Text>
+                <View style={{ height: "36%", justifyContent:"center",alignItems: "center"}}>
+                    <Logo lado={150} />
+                    <Text style={estilo.MenuTitulo}>Cadastro</Text>
+                </View>
 
                 <Text style={estilo.inputTitulo}>Nome da ONG:</Text>
                 <Ipt placeholder="Nome da ONG" largura="80%"/>

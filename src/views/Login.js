@@ -19,8 +19,10 @@ export default props => (
                     titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
                     navegacao={props.navigation}
                     style={estilo.VoltarBtn} />
-                <Logo lado={150} />
-                <Text style={estilo.MenuTitulo}>Login</Text>
+                <View style={{ height: "32%", justifyContent:"center",alignItems: "center"}}>
+                    <Logo lado={150} />
+                    <Text style={estilo.MenuTitulo}>Login</Text>
+                </View>
 
                 <Text style={estilo.inputTitulo}>Email:</Text>
                 <Ipt placeholder="Email" largura="80%"/>
