@@ -30,7 +30,11 @@ export default props => (
                 <Text style={estilo.inputTitulo}>Senha:</Text>
                 <Ipt placeholder="Senha" largura="80%" escondido={true} />
 
-                <Btn titulo="Entrar" largura="50%" marginVertical={8} />
+                <Btn 
+                    titulo="Entrar" 
+                    largura="50%" 
+                    marginVertical={8} 
+                    funcaoPressionar={() => props.navigation.navigate("Tab")}/>
                 <Btn 
                         somenteTexto={true}
                         tamanhoFonte={14} 
