@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, View  } from 'react-native'
+import { ScrollView, StyleSheet, View  } from 'react-native'
 
 import estilo from '../components/estilo'
 import Header from '../components/Header'
@@ -7,12 +7,15 @@ import Post from '../components/Post'
 
 export default props => {
     return(
-        <SafeAreaView style={estilo.Flex1} >
+        <ScrollView style={estilo.Flex1} >
             <Header navegacao={props.navigation} />
             <View style={style.Container}>
-                <Post />
+                <Post postTitulo="Tubarão 🐳👍" imgPost={require("../img/post_img.jpg")}/>
+                <Post postTitulo="Praia 🏜" />
+                <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
+                <Post postTitulo="Praia 🏖" />
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 const style = StyleSheet.create({

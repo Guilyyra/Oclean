@@ -4,14 +4,46 @@ import Estilo from './estilo'
 import { MaterialIcons } from '@expo/vector-icons'
 
 export default props => {
-    const ImgLogo = require('../img/oclean_logo.png')
+    const ImgPerfil = require('../img/oclean_logo.png')
+    const possuiImagem = props.possuiImagem || false
+    // Ao utilizar o post.js, o imgPost vai ter que ser um require("url_da_img")
+    const imgPost = props.imgPost || ""
+    const postTitulo = props.postTitulo || ""
+    const postDescricao = props.postDescricao || ""
     const largura = 30
     const altura = 30
+
+    function imagem() {
+        if(imgPost){
+            return (
+                <View style={style.postcontainerImagem}>
+                    <Image 
+                        style={style.postImagem}
+                        source={imgPost}
+                        />
+                </View>
+            )
+        }
+    }
+
+    function descricao(){
+        if(postDescricao){
+            return (
+                <Text style={{
+                    fontSize: 14,
+                    color: "rgba(51, 51, 51, 0.8)",
+                    marginTop: 8}}>
+                    {postDescricao}
+                </Text>
+            )
+        }
+    }
+
     return(
         <View style={style.postContainer}>
-            <View style={style.postInformacoesUsuarioContainer}>
+            <View style={style.InformacoesUsuarioContainer}>
                 <Image 
-                    source={ImgLogo}
+                    source={ImgPerfil}
                     style={{
                         width: largura,
                         height: altura,
@@ -22,14 +54,10 @@ export default props => {
                 <Text style={{fontSize: 13, marginRight: 8}}>Júlio Hiago - Limpa Praias · 30min</Text>
             </View>
             <View style={style.postContainerConteudo}>
-                <Text style={{fontSize: 18}}>Fiz um desenho pois adoro a praia! Vamo!</Text>
+                <Text style={{fontSize: 18, fontWeight: "bold"}}>{postTitulo}</Text>
+                {descricao()}
             </View>
-            <View style={style.postcontainerImagem}>
-                <Image 
-                    style={style.postImagem}
-                    source={require('../img/postimg.jpg')}
-                    />
-            </View>
+            {imagem()}
             <View style={style.postContainerCurtidas}>
                 <View style={{ flexDirection: "row", alignItems: "center"}}>
                     <MaterialIcons style={{ marginRight: 8}}name="thumb-up" size={24} color="#333333" />
@@ -45,46 +73,41 @@ const style = StyleSheet.create({
     postContainer: {
         width: "90%",
         height: "auto",
+        marginBottom: 40,
+
         backgroundColor: "white",
         borderRadius: 16,
 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 11,
-        },
-        shadowOpacity: 0.57,
-        shadowRadius: 15.19,
-
-        elevation: 24
+        elevation: 7
     },
     postcontainerImagem: {
-        height: 300,
+        height: 240,
         alignItems: "center",
         justifyContent: "center",
+        marginBottom: 16
     },
     postImagem: {
         width: "80%",
         height: 240,
         borderRadius: 16,
     },
-    postInformacoesUsuarioContainer: {
+    InformacoesUsuarioContainer: {
         flexDirection: "row",
         paddingLeft: 16,
         paddingTop: 16,
         alignItems: "center",
-
     },
     postContainerConteudo: {
-        flex: 1,
-        marginBottom: 32,
-        marginTop: 16,
-        paddingLeft: 16,
+        width: "80%",
+        marginHorizontal: "10%",
+        marginVertical: 16,
+
+        textAlign: "center"
     },
     postContainerCurtidas: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical: 16,
         paddingHorizontal: 32,
+        marginBottom: 16
     }
 })

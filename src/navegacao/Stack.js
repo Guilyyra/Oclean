@@ -12,7 +12,7 @@ import Tab from './Tab'
 const Stack = createNativeStackNavigator()
 
 export default props => (
-    <Stack.Navigator initialRouteName="BemVindo" screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName="Tab" screenOptions={{headerShown: false}}>
         <Stack.Screen name="BemVindo" component={BemVindo} />
         <Stack.Screen name="CadastroEscolha" component={CadastroEscolha} />
         <Stack.Screen name="CadastroONG" component={CadastroONG} />

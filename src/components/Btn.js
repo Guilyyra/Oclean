@@ -10,16 +10,18 @@ export default props => {
     const svgEsquerda = props.svgEsquerda || 0
     const titulo = props.titulo || ""
     const largura = props.largura || "70%"
-    const altura = props.altura || null
+    const altura = props.altura || "auto"
     const tamanhoFonte = props.tamanhoFonte || 24
     const funcaoPressionar = props.funcaoPressionar || null
     const marginVertical = props.marginVertical || null
+    const marginHorizontal = props.marginHorizontal || null
     const somenteTexto = props.somenteTexto || false
 
     const medidas = {
         width: largura,
         height: altura,
-        marginVertical: marginVertical
+        marginVertical: marginVertical,
+        marginHorizontal: marginHorizontal
     }
 
     const checarSvg = () => {
