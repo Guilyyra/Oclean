@@ -12,20 +12,23 @@ export default props => {
         <SafeAreaView style={estilo.Flex1}>
             <PraiaFundo>
                 <Menu>
+                    {/* Possibilidade de colocar tudo isso em um elemento só */}
                     <View style={{ height: "36%", justifyContent:"center",alignItems: "center"}}>
-                        <Logo lado={150} />
+                        <Logo lado={128} />
                         <Text style={[estilo.MenuTitulo, {paddingBottom: 0}]}>Bem Vindo!</Text>
                     </View>
                         <Text style={estilo.menuSubTitulo}>
                             Você escolheu ajudar a natureza usando Oclean!
                         </Text>
+                    {/* Diminuir a distância dos dois botões */}
                     <Btn 
-                        titulo="Sou novo" 
-                        funcaoPressionar={() => props.navigation.navigate("CadastroEscolha")} 
-                        marginVertical={16} />
+                        titulo="Sou novo"
+                        marginVertical="1%"
+                        funcaoPressionar={() => props.navigation.navigate("CadastroEscolha")} />
                     <Btn 
                         somenteTexto={true}
-                        tamanhoFonte={18} 
+                        tamanhoFonte={18}
+                        marginVertical="1%" 
                         titulo="Já tenho conta"
                         funcaoPressionar={() => props.navigation.navigate("Login")} />
                 </Menu>

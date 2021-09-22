@@ -7,9 +7,7 @@ import CadastroONG from '../views/CadastroONG'
 import CadastroPessoa from '../views/CadastroPessoa'
 import Login from '../views/Login'
 import RecuperarSenha from '../views/RecuperarSenha'
-import Home from '../views/Home'
 import Tab from './Tab'
-import Comunidade from '../views/Comunidade'
 
 const Stack = createNativeStackNavigator()
 

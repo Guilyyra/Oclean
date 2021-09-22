@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, StatusBar, Platform, Text  } from 'react-native'
+import { SafeAreaView } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import estilo from '../components/estilo'
@@ -9,7 +9,7 @@ import VoltarBtn from '../components/VoltarBtn'
 export default props => {
     return(
         <SafeAreaView>
-            <Header />
+            <Header navegacao={props.navigation} />
             <VoltarBtn 
                         titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
                         navegacao={props.navigation}
@@ -17,8 +17,3 @@ export default props => {
         </SafeAreaView>
     )
 }
-const style = StyleSheet.create({
-    Container: {
-
-    }
-})

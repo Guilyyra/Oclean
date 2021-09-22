@@ -19,8 +19,7 @@ export default props => {
                     }}
                     resizeMode="cover"
                 />
-                <Text style={{fontSize: 13, marginRight: 8}}>Júlio Hiago - Limpa Praias</Text>
-                <Text style={{fontSize: 10}}>· 30min</Text>
+                <Text style={{fontSize: 13, marginRight: 8}}>Júlio Hiago - Limpa Praias · 30min</Text>
             </View>
             <View style={style.postContainerConteudo}>
                 <Text style={{fontSize: 18}}>Fiz um desenho pois adoro a praia! Vamo!</Text>
@@ -56,6 +55,8 @@ const style = StyleSheet.create({
         },
         shadowOpacity: 0.57,
         shadowRadius: 15.19,
+
+        elevation: 24
     },
     postcontainerImagem: {
         height: 300,

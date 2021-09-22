@@ -2,11 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Home from '../views/Home';
-import Lixo from '../views/Lixo';
-import Perfil from '../views/Perfil';
-import Comunidade from '../views/Comunidade';
-import PerfilStack from './SubStack';
 import SubStack from './SubStack';
 
 const tab = createBottomTabNavigator()
@@ -39,10 +34,10 @@ export default props => (
             },
             headerShown: false,     
             tabBarActiveBackgroundColor: '#63E1FD',
-            tabBarInactiveBackgroundColor: '#63E1FD',
-            tabBarActiveTintColor: 'rgba(255, 255, 255, 0.68)',
-            tabBarinactiveTintColor: '#fff',
+            tabBarActiveTintColor: '#fff',
+            tabBarinactiveTintColor: 'rgba(255, 255, 255, 0.68)',
             tabBarShowLabel: false,
+            tabBarStyle:{ elevation: 24 },
 
         })}>
         <tab.Screen name="HomeStack" component={SubStack} initialParams={{ Tela: "Home"}}/>

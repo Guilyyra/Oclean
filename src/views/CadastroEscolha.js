@@ -25,13 +25,15 @@ export default props => {
                     </View>
                     
                     <Btn
-                        altura={72}
+                        altura={54}
                         svg={<MaterialIcons name="business" size={24} color="#fff" />}
+                        svgEsquerda={16}
                         titulo="ONG"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroONG")}}/>
                     <Btn
-                        altura={72}
+                        altura={54}
                         svg={<MaterialIcons name="directions-run" size={24} color="#fff" />}
+                        svgEsquerda={16}
                         titulo="Pessoa"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroPessoa")}} />
                 </Menu>
