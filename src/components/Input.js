@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 
-import estilo from './estilo';
-
 export default props => {
 
     const placeholder = props.placeholder || "Escreva aqui!"
     const texto = props.texto || ""
-    const [valor, setValor] = useState(texto)
+    const [provisorio, setProvisorio] = useState("Provisório")
+    const valor = props.valor
+    const setValor = props.setValor || setProvisorio
 
     const largura = props.largura || "70%"
     const altura = props.altura || 40
 
     const escondido = props.escondido || false
     const tipoTeclado = props.tipoTeclado || "default"
+
+    const funcaoPressionar = props.funcaoPressionar ? props.funcaoPressionar : _ => {}
 
     const medidas = {
         width: largura,
@@ -31,7 +33,9 @@ export default props => {
                 onChangeText = {input => {setValor(input)}}
                 secureTextEntry = {escondido}
                 keyboardType = {tipoTeclado}
-                onFocus = {() => setFocado(true)}
+                onFocus = {() => {
+                    setFocado(true)
+                    funcaoPressionar()}}
                 onBlur = {() => valor ? setFocado(true) : setFocado(false)}
                 placeholderTextColor = "#C4C4C4"
             />

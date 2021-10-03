@@ -36,7 +36,7 @@ export default props => {
         }
     }
     return (
-        <TouchableOpacity style={[somenteTexto ? style.btnTexto : style.btn,medidas]} onPress={funcaoPressionar} >
+        <TouchableOpacity style={[somenteTexto ? style.btnTexto : style.btn,medidas ]} onPress={funcaoPressionar} >
             <Text style={{position: "absolute", left: svgEsquerda }}>{svg}</Text>
             {checarSvg()}
         </TouchableOpacity>

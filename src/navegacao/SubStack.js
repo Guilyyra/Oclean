@@ -5,6 +5,7 @@ import Comunidade from '../views/Comunidade'
 import Home from '../views/Home'
 import Lixo from '../views/Lixo'
 import Perfil from '../views/Perfil'
+import Configuracoes from '../views/Configuracoes'
 
 const Stack = createNativeStackNavigator()
 
@@ -17,6 +18,7 @@ export default props => {
             <Stack.Screen name="Lixo" component={Lixo} />
             <Stack.Screen name="Perfil" component={Perfil} />
             <Stack.Screen name="Comunidade" component={Comunidade} />
+            <Stack.Screen name="Configuracoes" component={Configuracoes} />
         </Stack.Navigator>
     )
 }

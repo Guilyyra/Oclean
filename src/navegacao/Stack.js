@@ -1,6 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import Splash from '../views/Splash'
 import BemVindo from '../views/BemVindo'
 import CadastroEscolha from '../views/CadastroEscolha'
 import CadastroONG from '../views/CadastroONG'
@@ -12,7 +13,8 @@ import Tab from './Tab'
 const Stack = createNativeStackNavigator()
 
 export default props => (
-    <Stack.Navigator initialRouteName="Tab" screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="BemVindo" component={BemVindo} />
         <Stack.Screen name="CadastroEscolha" component={CadastroEscolha} />
         <Stack.Screen name="CadastroONG" component={CadastroONG} />

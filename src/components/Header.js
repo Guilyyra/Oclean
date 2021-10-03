@@ -23,7 +23,7 @@ export default props => (
             svg={<MaterialIcons name="settings" size={24} color="#333333"/>}
             somenteTexto={true}
             somenteSvg={true}
-            funcaoPressionar={() => { props.navegacao.navigate("BemVindo")}}/>
+            funcaoPressionar={() => { props.navegacao.navigate("Configuracoes") }}/>
             {/* Tentar contornar essa obrigatoriedade de colocar o navegacao
                 por parte do <header> nas telas que o usam
             */}

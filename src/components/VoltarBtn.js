@@ -4,7 +4,7 @@ import { Text,  Image, TouchableOpacity, StyleSheet } from 'react-native'
 export default props => {
     const titulo = props.titulo || "Clique aqui!"
     const navegacao = props.navegacao
-    const funcao = props => {navegacao.goBack()}
+    const funcao = props.funcaoPressionar ?props.funcaoPressionar : _=> {navegacao.goBack()}
 
     return (
         <TouchableOpacity style={style.VoltarBtn} onPress={ props.funcao || funcao} >

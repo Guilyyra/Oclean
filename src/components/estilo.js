@@ -9,7 +9,6 @@ export default StyleSheet.create({
     },
     inputTitulo:{
         alignSelf: "flex-start",
-        marginLeft: "10%",
         fontSize: 18,
         color: "rgba(50, 50, 50, 0.6)",
     },
