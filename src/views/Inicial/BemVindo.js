@@ -1,11 +1,11 @@
 import React from 'react'
 import { SafeAreaView, Text, StyleSheet, View } from 'react-native'
 
-import estilo from '../components/estilo'
-import PraiaFundo from '../components/PraiaFundo'
-import Menu from '../components/Menu'
-import Logo from '../components/Logo'
-import Btn from '../components/Btn'
+import estilo from '../../components/estilo'
+import PraiaFundo from '../../components/PraiaFundo'
+import Menu from '../../components/Menu'
+import Logo from '../../components/Logo'
+import Btn from '../../components/Btn'
 
 export default props => {
     return(

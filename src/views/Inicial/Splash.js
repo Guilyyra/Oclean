@@ -4,8 +4,8 @@ import { View, ActivityIndicator, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 
-import LogoImg from '../img/oclean_logo.png'
-import estilo from '../components/estilo'
+import LogoImg from '../../img/oclean_logo.png'
+import estilo from '../../components/estilo'
 
 export default class AuthOrApp extends Component {
 

@@ -5,15 +5,15 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import estilo from '../components/estilo'
-import Btn from '../components/Btn'
-import Ipt from '../components/Input'
-import Logo from '../components/Logo'
-import VoltarBtn from '../components/VoltarBtn'
-import Menu from '../components/Menu'
-import PraiaFundo from '../components/PraiaFundo'
+import estilo from '../../components/estilo'
+import Btn from '../../components/Btn'
+import Ipt from '../../components/Input'
+import Logo from '../../components/Logo'
+import VoltarBtn from '../../components/VoltarBtn'
+import Menu from '../../components/Menu'
+import PraiaFundo from '../../components/PraiaFundo'
 
-import { server, showError } from '../comum'
+import { server, showError } from '../../comum'
 
 export default props => {
 
@@ -22,6 +22,8 @@ export default props => {
     
     login = async () => {
         try{
+            setErroEmail("")
+            setErroSenha("")
             const res = await axios.post(`${server}/usuarios/login`, {
                 email_usu: email,
                 senha_usu: senha,
@@ -30,10 +32,23 @@ export default props => {
             AsyncStorage.setItem("userData", JSON.stringify(res.data))
             axios.defaults.headers.common["Authorization"] = `bearer ${res.data.token}`
             props.navigation.navigate("Tab")
-        } catch(e) {
-            showError(e)
+        } catch(erro) {
+            switch(JSON.stringify(erro.response.data)){
+                case '"A senha informada é inválida!"':
+                    setErroSenha(erro.response.data)
+                    break;
+                case '"Email errado ou usuário não cadastrado!"':
+                    setErroEmail(erro.response.data)
+                    break;
+                default:
+                    showError(erro)
+            }
         }
     }
+
+    // Erros
+    const[erroSenha, setErroSenha] = useState("")
+    const[erroEmail, setErroEmail] = useState("")
 
     // Validações - Ainda não está pronto
     const validacoes = []
@@ -58,10 +73,12 @@ export default props => {
 
                     <View style={{ width: '80%' }}>
                         <Text style={estilo.inputTitulo}>Email:</Text>
-                        <Ipt placeholder="Email" largura="100%" valor={email} setValor={setEmail} />
+                        <Ipt placeholder="Email" largura="100%" valor={email} marginBottom={4} setValor={setEmail} />
+                        <Text style={[estilo.iptErro, {marginBottom: 12}]}>{erroEmail}</Text>
 
                         <Text style={estilo.inputTitulo}>Senha:</Text>
-                        <Ipt placeholder="Senha" largura="100%" escondido={true} valor={senha} setValor={setSenha} />
+                        <Ipt placeholder="Senha" largura="100%" escondido={true} marginBottom={4} valor={senha} setValor={setSenha} />
+                        <Text style={[estilo.iptErro, {marginBottom: 12}]}>{erroSenha}</Text>
                     </View>
 
                     <Btn 

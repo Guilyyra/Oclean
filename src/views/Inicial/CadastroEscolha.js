@@ -2,12 +2,12 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
-import estilo from '../components/estilo'
-import Btn from '../components/Btn'
-import Logo from '../components/Logo'
-import VoltarBtn from '../components/VoltarBtn'
-import PraiaFundo from '../components/PraiaFundo'
-import Menu from '../components/Menu'
+import estilo from '../../components/estilo'
+import Btn from '../../components/Btn'
+import Logo from '../../components/Logo'
+import VoltarBtn from '../../components/VoltarBtn'
+import PraiaFundo from '../../components/PraiaFundo'
+import Menu from '../../components/Menu'
 
 export default props => {
     const a = <MaterialIcons name="business" size={24} color="#fff" /> + "ong"

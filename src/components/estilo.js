@@ -12,6 +12,10 @@ export default StyleSheet.create({
         fontSize: 18,
         color: "rgba(50, 50, 50, 0.6)",
     },
+    iptErro: {
+        fontSize: 10,
+        color: "rgba(255, 0, 0, 0.6)",
+    },
     // Bem Vindo, login e cadastro
     MenuTitulo: {
         color: "#333333",

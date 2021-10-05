@@ -1,13 +1,13 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Splash from '../views/Splash'
-import BemVindo from '../views/BemVindo'
-import CadastroEscolha from '../views/CadastroEscolha'
-import CadastroONG from '../views/CadastroONG'
-import CadastroPessoa from '../views/CadastroPessoa'
-import Login from '../views/Login'
-import RecuperarSenha from '../views/RecuperarSenha'
+import Splash from '../views/Inicial/Splash'
+import BemVindo from '../views/Inicial/BemVindo'
+import CadastroEscolha from '../views/Inicial/CadastroEscolha'
+import CadastroONG from '../views/Inicial/CadastroONG'
+import CadastroPessoa from '../views/Inicial/CadastroPessoa'
+import Login from '../views/Inicial/Login'
+import RecuperarSenha from '../views/Inicial/RecuperarSenha'
 import Tab from './Tab'
 
 const Stack = createNativeStackNavigator()

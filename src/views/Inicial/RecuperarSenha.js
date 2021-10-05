@@ -2,13 +2,13 @@ import React from 'react'
 import { SafeAreaView, View, Text  } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import estilo from '../components/estilo'
-import Btn from '../components/Btn'
-import Ipt from '../components/Input'
-import Logo from '../components/Logo'
-import VoltarBtn from '../components/VoltarBtn'
-import Menu from '../components/Menu'
-import PraiaFundo from '../components/PraiaFundo'
+import estilo from '../../components/estilo'
+import Btn from '../../components/Btn'
+import Ipt from '../../components/Input'
+import Logo from '../../components/Logo'
+import VoltarBtn from '../../components/VoltarBtn'
+import Menu from '../../components/Menu'
+import PraiaFundo from '../../components/PraiaFundo'
 
 export default props => (
     <SafeAreaView style={estilo.Flex1}>

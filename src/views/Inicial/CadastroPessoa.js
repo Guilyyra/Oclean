@@ -4,16 +4,16 @@ import { SafeAreaView, View, Text, Keyboard, StyleSheet  } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { MaterialIcons } from '@expo/vector-icons'
-import estilo from '../components/estilo'
-import Btn from '../components/Btn'
-import Ipt from '../components/Input'
-import Logo from '../components/Logo'
-import VoltarBtn from '../components/VoltarBtn'
-import Menu from '../components/Menu'
-import PraiaFundo from '../components/PraiaFundo'
+import estilo from '../../components/estilo'
+import Btn from '../../components/Btn'
+import Ipt from '../../components/Input'
+import Logo from '../../components/Logo'
+import VoltarBtn from '../../components/VoltarBtn'
+import Menu from '../../components/Menu'
+import PraiaFundo from '../../components/PraiaFundo'
 
 import axios from 'axios';
-import { server, showError } from '../comum'
+import { server, showError } from '../../comum'
 
 export default props => {
     
@@ -48,14 +48,23 @@ export default props => {
                 email_usu: email,
                 senha_usu: senha,
                 loc_usu: localizacao,
-                data_usu: data
+                data_usu: data,
+                tipo_usu: "Pessoa"
             })
             
             props.navigation.navigate("Login")
-        } catch(e) {
-            showError(e)
+        } catch(erro) {
+            switch(JSON.stringify(erro.response.data)){
+                case '"Email já cadastrado!"':
+                    setErroEmail(erro.response.data)
+                    break;
+                default:
+                    showError(erro)
+            }
         }
     }
+
+    const[erroEmail, setErroEmail] = useState("")
 
     const [data, setData] = useState(new Date());
     const [mostrarData, setMostrarData] = useState(false);
@@ -104,7 +113,8 @@ export default props => {
 
                         <View style={[ style.FormContainer, { marginLeft: EsquerdaUltimo } ]}>
                             <Text style={estilo.inputTitulo}>Email:</Text>
-                            <Ipt placeholder="exemplo@exemplo.com.br" largura="100%" valor={email} setValor={setEmail}/>
+                            <Ipt placeholder="exemplo@exemplo.com.br" largura="100%" marginBottom={4} valor={email} setValor={setEmail}/>
+                            <Text style={[estilo.iptErro, {marginBottom: 12}]}>{erroEmail}</Text>
 
                             {/*Precisa colocar as barras das datas automaticamente, coloquei numeric por enquanto*/}
                             <Text style={estilo.inputTitulo}>Senha:</Text>

@@ -11,6 +11,7 @@ export default props => {
 
     const largura = props.largura || "70%"
     const altura = props.altura || 40
+    const marginBottom = props.marginBottom || 16
 
     const escondido = props.escondido || false
     const tipoTeclado = props.tipoTeclado || "default"
@@ -20,6 +21,7 @@ export default props => {
     const medidas = {
         width: largura,
         height: altura,
+        marginBottom: marginBottom
     }
 
     const [focado, setFocado] = useState(false) 
@@ -49,7 +51,6 @@ const style = StyleSheet.create({
         height: 40,
         borderBottomWidth: 1,
         borderBottomColor: "black",
-        marginBottom: 16,
     },
     inputFocado:{
         borderBottomColor: "red"
