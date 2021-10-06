@@ -28,12 +28,14 @@ export default props => {
                         altura={54}
                         svg={<MaterialIcons name="business" size={24} color="#fff" />}
                         svgEsquerda={16}
+                        svgAlignSelf="flex-start"
                         titulo="ONG"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroONG")}}/>
                     <Btn
                         altura={54}
                         svg={<MaterialIcons name="directions-run" size={24} color="#fff" />}
                         svgEsquerda={16}
+                        svgAlignSelf="flex-start"
                         titulo="Pessoa"
                         funcaoPressionar={() => {props.navigation.navigate("CadastroPessoa")}} />
                 </Menu>

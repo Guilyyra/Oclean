@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text,  Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default props => {
     /*  somenteText - Modifica a interface do Botão, mudando a cor de fundo, texto, etc
@@ -8,6 +8,7 @@ export default props => {
     const somenteSvg = props.somenteSvg || false
     const svg = props.svg || null
     const svgEsquerda = props.svgEsquerda || 0
+    const svgAlignSelf = props.svgAlignSelf || null
     const titulo = props.titulo || ""
     const largura = props.largura || "70%"
     const altura = props.altura || "auto"
@@ -16,13 +17,16 @@ export default props => {
     const marginVertical = props.marginVertical || null
     const marginHorizontal = props.marginHorizontal || null
     const somenteTexto = props.somenteTexto || false
+    const borderRadius = props.borderRadius || 10
+    const estilo = props.estilo || {}
 
-    const medidas = {
+    const medidas = [{
         width: largura,
         height: altura,
         marginVertical: marginVertical,
-        marginHorizontal: marginHorizontal
-    }
+        marginHorizontal: marginHorizontal,
+        borderRadius: borderRadius
+    },estilo]
 
     const checarSvg = () => {
         if(!somenteSvg){
@@ -37,7 +41,10 @@ export default props => {
     }
     return (
         <TouchableOpacity style={[somenteTexto ? style.btnTexto : style.btn,medidas ]} onPress={funcaoPressionar} >
-            <Text style={{position: "absolute", left: svgEsquerda }}>{svg}</Text>
+            {svg && 
+                <Text 
+                    style={[{ alignSelf: svgAlignSelf, marginLeft: svgEsquerda }, !somenteSvg ? {position: "absolute"} : {} ]}>
+                {svg}</Text>}
             {checarSvg()}
         </TouchableOpacity>
     )
@@ -50,7 +57,6 @@ const style = StyleSheet.create({
         justifyContent: "center",
 
         backgroundColor: "#63E1FD",
-        borderRadius: 10,
         
         elevation: 8,
             

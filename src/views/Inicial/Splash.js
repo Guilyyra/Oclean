@@ -13,7 +13,6 @@ export default class AuthOrApp extends Component {
 
     componentDidMount = async () => {
         const userDataJson = await AsyncStorage.getItem('userData')
-
         let userData = null
         try{
             userData = JSON.parse(userDataJson)

@@ -31,7 +31,7 @@ export default props => {
 
             AsyncStorage.setItem("userData", JSON.stringify(res.data))
             axios.defaults.headers.common["Authorization"] = `bearer ${res.data.token}`
-            props.navigation.navigate("Tab")
+            props.navigation.navigate("Tab", res.data )
         } catch(erro) {
             switch(JSON.stringify(erro.response.data)){
                 case '"A senha informada é inválida!"':
