@@ -21,6 +21,6 @@ export default props => (
         <Stack.Screen name="CadastroPessoa" component={CadastroPessoa} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
-        <Stack.Screen name="Tab" component={Tab} />
+        <Stack.Screen name="Tab" component={Tab} options={{unmountOnBlur: true}} />
     </Stack.Navigator>
 )

@@ -15,6 +15,7 @@ export default props => {
 
     const escondido = props.escondido || false
     const tipoTeclado = props.tipoTeclado || "default"
+    const multiline = props.multiline || false
 
     const funcaoPressionar = props.funcaoPressionar ? props.funcaoPressionar : _ => {}
 
@@ -40,6 +41,7 @@ export default props => {
                     funcaoPressionar()}}
                 onBlur = {() => valor ? setFocado(true) : setFocado(false)}
                 placeholderTextColor = "#C4C4C4"
+                multiline = {multiline}
             />
         </>
     )

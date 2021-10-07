@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
+import { CommonActions } from '@react-navigation/routers'
 
 
 import axios from 'axios'
@@ -12,10 +13,19 @@ import estilo from '../components/estilo'
 
 export default props => {
 
-    logout = () => {
+    const logout = () => {
         delete axios.defaults.headers.common["Authorization"]
         AsyncStorage.removeItem("userData")
-        props.navigation.navigate("BemVindo")
+        // reseta a navegação (inclusive os parâmetros)
+        props.navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                { name: 'BemVindo' }
+              ],
+            })
+        );
+
     }
 
     return(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -7,6 +7,10 @@ import SubStack from './SubStack';
 const tab = createBottomTabNavigator()
 
 export default props => {
+    const [id, setId] = useState(props.route.params.id_usu)
+    if(id != props.route.params.id_usu){
+        setId(props.route.params.id_usu)
+    }
     return (
         <tab.Navigator
             screenOptions={({ route }) => ({
@@ -40,10 +44,10 @@ export default props => {
                 tabBarShowLabel: false,
                 tabBarStyle:{ elevation: 24, height: "5%" },
 
-            })}>
-            <tab.Screen name="HomeStack" component={SubStack} initialParams={{ Tela: "Home"}} />
-            <tab.Screen name="LixoStack" component={SubStack} initialParams={{ Tela: "Lixo", parametrosReais: props.route.params}} />
-            <tab.Screen name="PerfilStack" component={SubStack} initialParams={{ Tela: "Perfil", id_usu: props.route.params.id_usu }} />
+            })} initialRouteName="HomeStack" >
+            <tab.Screen name="HomeStack" component={SubStack} initialParams={{ Tela: "Home", id_usu: id}} />
+            <tab.Screen name="LixoStack" component={SubStack} initialParams={{ Tela: "Lixo"}} />
+            <tab.Screen name="PerfilStack" component={SubStack} initialParams={{ Tela: "Perfil", id_usu: props.route.params.id_usu }} options={{unmountOnBlur: true}} />
         </tab.Navigator>
     )
 }

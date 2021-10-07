@@ -20,7 +20,7 @@ export default props => {
     const [email, setEmail] = useState("lucas2@gmail.com")
     const [senha, setSenha] = useState("123456")
     
-    login = async () => {
+    const login = async () => {
         try{
             setErroEmail("")
             setErroSenha("")
@@ -28,7 +28,6 @@ export default props => {
                 email_usu: email,
                 senha_usu: senha,
             })
-
             AsyncStorage.setItem("userData", JSON.stringify(res.data))
             axios.defaults.headers.common["Authorization"] = `bearer ${res.data.token}`
             props.navigation.navigate("Tab", res.data )

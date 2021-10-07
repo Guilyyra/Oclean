@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Image, View, Text  } from 'react-native'
 
 //import axios from 'axios'
-const axios = require('axios').default;
-
+import axios from 'axios'
 
 import estilo from '../components/estilo'
 import Header from '../components/Header'
@@ -20,20 +19,19 @@ export default props => {
 
     const id = parametros.id_usu
 
-    var [usu, setUsu] = useState({})
+    var [usu, setUsu] = useState("Carregando...")
 
-    getUsuario = async () => {
-        try{
-            const res = await axios.get(`${server}/usuarios/${id}`)
-            setUsu(res.data[0])
-            
-        }catch(e){
-            showError(e)
-            res = { erro: "erro"}
+    const getUsuario = async () => {
+        if(usu == "Carregando...") {
+            try{
+                const res = await axios.get(`${server}/usuarios/${id}`)
+                setUsu(res.data[0])    
+            }catch(e){
+                showError(e)
+                res = { erro: "erro"}
+            }
         }
     }
-
-
     getUsuario()
 
     return(
