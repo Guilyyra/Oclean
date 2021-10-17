@@ -10,7 +10,6 @@ import PraiaFundo from '../../components/PraiaFundo'
 import Menu from '../../components/Menu'
 
 export default props => {
-    const a = <MaterialIcons name="business" size={24} color="#fff" /> + "ong"
     return (
         <SafeAreaView style={estilo.Flex1}>
             <PraiaFundo>

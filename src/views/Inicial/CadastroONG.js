@@ -99,7 +99,7 @@ export default props => {
 
                             {/*Precisa colocar as barras das datas automaticamente, coloquei numeric por enquanto*/}
                             <Text style={estilo.inputTitulo}>Senha:</Text>
-                            <Ipt placeholder="Senha segura e confiável" largura="100%" valor={senha} setValor={setSenha}/>
+                            <Ipt placeholder="Senha segura e confiável" escondido={true} largura="100%" valor={senha} setValor={setSenha}/>
                         </View>
                     </View>
 

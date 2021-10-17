@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Image } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import axios from 'axios'
 
@@ -8,11 +9,11 @@ import Header from '../components/Header'
 import Ipt from '../components/Input'
 import Btn from '../components/Btn'
 import VoltarBtn from '../components/VoltarBtn'
+import BtnImg from '../components/BtnImg'
 
-import { MaterialIcons } from '@expo/vector-icons'
 import { server, showError } from '../comum'
 
-const ImgFundo = require('../img/desenho_praia.png')
+import { uploadFoto } from '../components/imgComum'
 
 
 
@@ -20,14 +21,28 @@ export default props => {
 
     const parametros = props.route.params
     const id = parametros.id_usu
-    console.log(id)
 
     const cadastrar = async() => {
+
+        console.log(nome.replace(/ /g, "%20"))
+
         try{
-            await axios.post(`${server}/comunidades/cadastrar`, {
+            const res = await axios.post(`${server}/comunidades/cadastrar`, {
                 nome_comu: nome,
                 descricao_comu: descricao,
                 id_ong: id
+            })
+
+            const comu = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
+
+            linkPerfil = await uploadFoto(fotoPerfil, 'fotoPerfil_comunidade', comu.data[0].id_comu)
+            linkBanner = await uploadFoto(fotoBanner, 'fotoBanner_comunidade', comu.data[0].id_comu)
+
+            console.log(linkPerfil + " " + linkBanner)
+            console.log(JSON.stringify(comu.data[0].id_comu))
+            await axios.put(`${server}/comunidades/${comu.data[0].id_comu}/alterar`, {
+                foto_perfil_comu: linkPerfil,
+                banner_comu: linkBanner,
             })
             
             props.navigation.navigate("Home")
@@ -45,9 +60,12 @@ export default props => {
     const [nome, setNome] = useState("Comunidade das folhas")
     const [descricao, setDescricao] = useState("Para amantes da briza do mar 🌴🍃🍀🌵, da conversação, da botânica e outros...")
     const [erroNome, setErroNome] = useState("")
+    const [fotoBanner, setFotoBanner] = useState({ uri: 'http://192.168.15.28:3000/img/lucas.jpg'})
+    const [fotoPerfil, setFotoPerfil] = useState({ uri: 'http://192.168.15.28:3000/img/lucas.jpg'})
+    
 
     return(
-        <View style={[estilo.Flex1, {backgroundColor: "#F3F2F3",}]} >
+        <ScrollView style={[estilo.Flex1, {backgroundColor: "#F3F2F3",}]} >
             <Header navegacao={props.navigation}/>
             <Text style={style.titulo}>Criar Comunidade</Text>
             <View style={style.ContainerForm}>
@@ -63,31 +81,53 @@ export default props => {
                     marginBottom={16}
                     valor={descricao}
                     setValor={setDescricao}/>
-
-                <Text style={style.TituloIpt}>Adcionar Foto:</Text>
-                <Image 
-                    source={ImgFundo} 
-                    style={{ 
-                        width: "100%", 
-                        height: 100,  
-                        borderRadius: 8,
-                        overflow: "hidden",
-                        marginBottom: 16
-                    }}
-                    resizeMode="cover" />
+                
+                <View style={{ width: "100%", alignItems: "center"}}>
+                <Text style={[style.TituloIpt, {alignSelf: "flex-start"}]}>Adcionar Foto de perfil:</Text>
+                        <Image 
+                            source={fotoPerfil} 
+                            style={{ 
+                                width: 200, 
+                                height: 200,  
+                                borderRadius: 200,
+                                overflow: "hidden",
+                                marginBottom: 16
+                        }}
+                        resizeMode="cover" />
+                </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
                     <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
-                    <MaterialIcons style={{marginHorizontal: 16}} name="insert-photo" size={24} color="#333333" />
+                    <BtnImg setFoto={setFotoPerfil} />
+                </View>
+
+                <View>
+                    <Text style={style.TituloIpt}>Adcionar Foto de capa:</Text>
+                    <Image 
+                        source={fotoBanner} 
+                        style={{ 
+                            width: "100%", 
+                            height: 100,  
+                            borderRadius: 8,
+                            overflow: "hidden",
+                            marginBottom: 16
+                        }}
+                        resizeMode="cover" />
+                </View>
+                <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
+                    <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
+                    <BtnImg setFoto={setFotoBanner} />
                 </View>
                 <View style={{alignSelf: "center", width: "50%"}}>
                     <Btn 
                         titulo="Criar" 
                         largura="100%" 
                         marginVertical={8} 
-                        funcaoPressionar={_ => cadastrar()} />
+                        funcaoPressionar={_ => {
+                            cadastrar()
+                        }} />
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

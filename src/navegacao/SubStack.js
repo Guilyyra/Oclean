@@ -17,7 +17,7 @@ export default props => {
     return (
         <Stack.Navigator initialRouteName={tela} screenOptions={{headerShown: false}} >
             <Stack.Screen name="Home" component={Home} initialParams={parametros} />
-            <Stack.Screen name="Lixo" component={Lixo} />
+            <Stack.Screen name="Lixo" component={Lixo} initialParams={parametros} />
             <Stack.Screen name="Perfil" component={Perfil} initialParams={parametros} />
             <Stack.Screen name="Comunidade" component={Comunidade} />
             <Stack.Screen name="Configuracoes" component={Configuracoes} />

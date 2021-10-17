@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
+
 export default props => {
     /*  somenteText - Modifica a interface do Botão, mudando a cor de fundo, texto, etc
         somenteSvg - Retira o Text, para botões que possuem apenas svg,

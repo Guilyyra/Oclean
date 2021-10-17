@@ -85,7 +85,7 @@ export default props => {
                     <View style={{ flexDirection: "row", width: "80%", alignContent: 'center'}} >
                         <View style={[ style.FormContainer, { marginLeft: EsquerdaPrimeiro, marginRight: '15%', position: positionPrimeiro } ]}>
                             <Text style={estilo.inputTitulo}>Nome:</Text>
-                            <Ipt placeholder="João Augusto da silva" largura="100%" valor={nome} setValor={setNome}/>
+                            <Ipt placeholder="João Augusto da silva" largura="100%"  valor={nome} setValor={setNome}/>
 
                             {/*Precisa colocar as barras das datas automaticamente, coloquei numeric por enquanto*/}
                             <Text style={estilo.inputTitulo}>Data de nascimento:</Text>
@@ -118,7 +118,7 @@ export default props => {
 
                             {/*Precisa colocar as barras das datas automaticamente, coloquei numeric por enquanto*/}
                             <Text style={estilo.inputTitulo}>Senha:</Text>
-                            <Ipt placeholder="Senha segura e confiável" largura="100%" valor={senha} setValor={setSenha}/>
+                            <Ipt placeholder="Senha segura e confiável" escondido={true} largura="100%" valor={senha} setValor={setSenha}/>
                         </View>
                     </View>
 
