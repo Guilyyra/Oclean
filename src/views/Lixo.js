@@ -3,7 +3,7 @@ import { View, Image, Button, Platform  } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 
 import BtnImg from '../components/BtnImg';
-import estilo from '../components/estilo'
+import Btn from '../components/Btn';
 import Header from '../components/Header'
 
 
@@ -11,8 +11,9 @@ import Header from '../components/Header'
 export default props => {
 
     return(
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <BtnImg id={props.route.params.id_usu} ></BtnImg>
+    <View style={{ flex: 1}}>
+        <Header navegacao={props.navigation} />
+        <Btn funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas%203"})} />
     </View>
     )
 }

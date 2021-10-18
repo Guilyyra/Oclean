@@ -37,9 +37,7 @@ export default props => {
 
             linkPerfil = await uploadFoto(fotoPerfil, 'fotoPerfil_comunidade', comu.data[0].id_comu)
             linkBanner = await uploadFoto(fotoBanner, 'fotoBanner_comunidade', comu.data[0].id_comu)
-
-            console.log(linkPerfil + " " + linkBanner)
-            console.log(JSON.stringify(comu.data[0].id_comu))
+            
             await axios.put(`${server}/comunidades/${comu.data[0].id_comu}/alterar`, {
                 foto_perfil_comu: linkPerfil,
                 banner_comu: linkBanner,
