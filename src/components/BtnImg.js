@@ -11,12 +11,15 @@ import axios from 'axios';
 export default props => {
     const id_usu = props.id || 0
     const setFoto = props.setFoto ? props.setFoto : _ => {}
+    const aspectoAltura = props.aspectoAltura || 3
+    const aspectoLargura = props.aspectoLargura || 4
+
 
     const handleChoosePhoto = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [aspectoLargura, aspectoAltura],
           quality: 1,
         });
     

@@ -84,7 +84,7 @@ export default  props => {
             <ScrollView >
                 <Header navegacao={props.navigation} />
                 <View style={style.Container}>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.28:3000/img/lucas.jpg"}}/>
+                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
                     <Post postTitulo="Praia 🏜" />
                     <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
                     <Post postTitulo="Praia 🏖" />

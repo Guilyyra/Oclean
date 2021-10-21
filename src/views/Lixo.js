@@ -13,7 +13,10 @@ export default props => {
     return(
     <View style={{ flex: 1}}>
         <Header navegacao={props.navigation} />
-        <Btn funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas%203"})} />
+        <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas%205"})} />
+        <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas%206"})} />
+        <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas0"})} />
+        <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas%20poze"})} />
     </View>
     )
 }

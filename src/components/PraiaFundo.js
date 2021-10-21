@@ -1,11 +1,11 @@
 import React from 'react'
-import { ImageBackground, StyleSheet } from 'react-native'
+import { ImageBackground, StyleSheet,  } from 'react-native'
 
 export default props => {
     const imgPraia = require("../img/desenho_praia.png");
     return (
         <ImageBackground source={imgPraia} resizeMode="cover" style={style.image}>
-            {props.children}
+                {props.children}
         </ImageBackground>
     )
 }

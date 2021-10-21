@@ -95,7 +95,7 @@ export default props => {
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
                     <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
-                    <BtnImg setFoto={setFotoPerfil} />
+                    <BtnImg aspectoLargura={400} aspectoAltura={400} setFoto={setFotoPerfil} />
                 </View>
 
                 <View>
@@ -113,7 +113,7 @@ export default props => {
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
                     <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
-                    <BtnImg setFoto={setFotoBanner} />
+                    <BtnImg aspectoLargura={1500} aspectoAltura={500} setFoto={setFotoBanner} />
                 </View>
                 <View style={{alignSelf: "center", width: "50%"}}>
                     <Btn 
