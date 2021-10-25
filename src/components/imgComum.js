@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function createFormData(photo, preId, id_usu) {
     const data = new FormData()
-    console.log(photo)
     const id = id_usu.toString()
     let typeImg = (photo.uri).slice(-3)
   

@@ -14,6 +14,7 @@ export default props => {
     const largura = props.largura || "70%"
     const altura = props.altura || "auto"
     const tamanhoFonte = props.tamanhoFonte || 24
+    const corFonte = props.corFonte || "white"
     const funcaoPressionar = props.funcaoPressionar || null
     const marginVertical = props.marginVertical || null
     const marginHorizontal = props.marginHorizontal || null
@@ -34,7 +35,7 @@ export default props => {
             return (
                 <Text 
                     style={[{fontSize: tamanhoFonte}, 
-                    somenteTexto ? {color: "#63E1FD"} : {color: "white"}]}>
+                    somenteTexto  ? {color: "#63E1FD"} : {color: corFonte}]}>
                         {titulo}
                 </Text>
             )

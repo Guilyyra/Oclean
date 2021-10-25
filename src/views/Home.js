@@ -11,6 +11,8 @@ import Post from '../components/Post'
 import Btn from '../components/Btn'
 
 export default  props => {
+    // Apagar depois
+    const imagem = `${server}/img/lucas.jpg`
 
     const parametros = props.route.params
 
@@ -84,7 +86,7 @@ export default  props => {
             <ScrollView >
                 <Header navegacao={props.navigation} />
                 <View style={style.Container}>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
+                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: imagem }}/>
                     <Post postTitulo="Praia 🏜" />
                     <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
                     <Post postTitulo="Praia 🏖" />

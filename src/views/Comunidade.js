@@ -12,7 +12,6 @@ import Evento from '../components/Mutirao'
 import axios from 'axios'
 import { server, showError } from '../comum'
 import Btn from '../components/Btn'
-import { back } from 'react-native/Libraries/Animated/src/Easing'
 
 export default props => {
     const ImgFundo = require('../img/desenho_praia.png')
@@ -20,9 +19,9 @@ export default props => {
 
     var [comu, setComu] = useState({ 
         nome_comu: "Carregando...", 
-        banner_comu: "http://192.168.15.10:3000/img/lucas.jpg",
-        foto_perfil_comu: "http://192.168.15.10:3000/img/lucas.jpg",
-        descricao_comu: ""
+        banner_comu: `${server}/img/lucas.jpg`,
+        foto_perfil_comu: `${server}/img/lucas.jpg`,
+        descricao_comu: "Carregando..."
     })
     
     const getComunidade = async () => {
@@ -30,6 +29,7 @@ export default props => {
             try{
             const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
             setComu(res.data[0])
+            console.log(comu)
             } catch(e) {
                 showError(e)
             }
@@ -43,10 +43,10 @@ export default props => {
 
         return(
                 <View style ={{ marginVertical: 16,  alignItems:'center', flex: 1}}>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: "http://192.168.15.10:3000/img/lucas.jpg"}}/>
+                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
+                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
+                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
+                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
                 </View>
         )
     }
@@ -61,8 +61,8 @@ export default props => {
 
     return(
         <>
-        {/* <Header navegacao={props.navigation} /> */}
         <ScrollView>
+            <Header navegacao={props.navigation} />
             <SafeAreaView style={[estilo.Flex1, {backgroundColor: '#f3f4f3'}]}>
                 <View>
 
@@ -87,9 +87,9 @@ export default props => {
                     </View>
 
                     <VoltarBtn 
-                                titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
-                                navegacao={props.navigation}
-                                style={estilo.VoltarBtn} 
+                        titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
+                        navegacao={props.navigation}
+                        style={estilo.VoltarBtn} 
                     />
                 </View>
                 <View style={style.ContainerDescricao}>

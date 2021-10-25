@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, StatusBar, Platform} from 'react-native'
+import { StyleSheet, View, StatusBar, Platform } from 'react-native'
 import Logo from './Logo'
 
 import Btn from './Btn'
