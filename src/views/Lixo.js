@@ -5,6 +5,10 @@ import * as Location from 'expo-location'
 
 import Btn from '../components/Btn';
 import CadastrarSinalizacao from '../components/CadastrarSinalizacao';
+import VerSinalizacao from '../components/VerSinalizacao';
+
+import axios from 'axios';
+import { server } from './../comum'
 
 export default props => {
 
@@ -35,6 +39,47 @@ export default props => {
     },[])
 
     const [sinalizar, setSinalizar] = useState(false)
+    const [verSin, setVerSin] = useState(false)
+    const [sinalizacoes, setSinalizacoes] = useState([])
+
+    const getSinalizacoes = async () => {
+        try{
+            const sinalizacoes = await axios.get(`${server}/sinalizacao`)
+            setSinalizacoes(sinalizacoes.data)
+        }catch(erro){
+            console.log(erro)
+        }
+    }
+
+    const renderizarSinalizacoes = () => {
+
+        getSinalizacoes()
+        
+        const views = []
+
+        for(var sinalizacao in sinalizacoes){
+            sinalizacao = sinalizacoes[sinalizacao]
+            
+            views.push(
+                <Marker coordinate={{
+                    latitude: Number.parseFloat(sinalizacao.latitude_sin),
+                    longitude: Number.parseFloat(sinalizacao.longitude_sin)
+                }}
+                title={`${sinalizacao.praia_sin} - ${sinalizacao.cidade_sin}`}
+                onPress={() => setVerSin(true)}
+                pinColor="blue"
+                description={sinalizacao.status_sin == "Limpo" ? "Já foi limpo" : "Ainda está sujo"}
+                key={sinalizacao.id_sin} />
+            )
+        }
+
+        return(
+            <>
+                { views }
+            </>
+        )
+        
+    }
 
     return(
     <View style={{ flex: 1, alignItems: "center" }}>
@@ -49,6 +94,7 @@ export default props => {
                 {sinalizar == true && <Marker onDragEnd={res => 
                     {setNovoMarker(res.nativeEvent.coordinate)
                     console.log(novoMarker)}} draggable={true} coordinate={origem}/>}
+                { renderizarSinalizacoes() }
         </MapView>
         {sinalizar == true &&
             <Btn estilo={[style.btnSinalizar, {bottom: 104}]} titulo="Confirmar" tamanhoFonte={20} funcaoPressionar={_ => setCadastrarView(true)} />
@@ -67,6 +113,8 @@ export default props => {
                 id_usu={props.route.params.id_usu}
                 latitude_sin={novoMarker.latitude.toString()}
                 longitude_sin={novoMarker.longitude.toString()} />}
+        {verSin == true &&
+            <VerSinalizacao funcaoVoltar={_ => setVerSin(false)} />}
     </View>
     )
 }
