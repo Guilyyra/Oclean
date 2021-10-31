@@ -24,14 +24,14 @@ export default props => {
           if (status === 'granted') {
                 let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true })
                 setOrigem({
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                    latitudeDelta: 0.000922,
-                    longitudeDelta: 0.000421
+                    latitude: location.coords.latitude,//-23.626178,
+                    longitude: location.coords.longitude,//-46.656873,
+                    latitudeDelta: 0.000922,//0.00922
+                    longitudeDelta: 0.000421//0.00421
                 })
                 setNovoMarker({
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude})
+                    latitude: location.coords.latitude,//location.coords.latitude-23.626178
+                    longitude: location.coords.longitude})//location.coords.longitude-46.65873})
           }  else {
               throw new Error('Location permission not granted')
           }
@@ -67,7 +67,7 @@ export default props => {
                 }}
                 title={`${sinalizacao.praia_sin} - ${sinalizacao.cidade_sin}`}
                 onPress={() => setVerSin(true)}
-                pinColor="blue"
+                pinColor="#63E1FD"
                 description={sinalizacao.status_sin == "Limpo" ? "Já foi limpo" : "Ainda está sujo"}
                 key={sinalizacao.id_sin} />
             )
@@ -83,17 +83,14 @@ export default props => {
 
     return(
     <View style={{ flex: 1, alignItems: "center" }}>
-        {/* <Header navegacao={props.navigation} /> */}
-        {/* <Text style={style.titulo}>Sinalizações de Lixo</Text> */}
         <MapView
             ref={mapRef}
             style={style.map}
             initialRegion={origem}
             showsUserLocation={true}
             mapPadding={{top:StatusBar.currentHeight + 16,right:0,bottom:0,left:0}}>
-                {sinalizar == true && <Marker onDragEnd={res => 
-                    {setNovoMarker(res.nativeEvent.coordinate)
-                    console.log(novoMarker)}} draggable={true} coordinate={origem}/>}
+                {sinalizar == true && <Marker onDragEnd={res => setNovoMarker(res.nativeEvent.coordinate)} 
+                    draggable={true} coordinate={origem}/>}
                 { renderizarSinalizacoes() }
         </MapView>
         {sinalizar == true &&
@@ -103,13 +100,17 @@ export default props => {
             if(!sinalizar){
                 mapRef.current.animateCamera({
                     center: origem,
-                    zoom: 20,
+                    zoom: 15,
                 }, { duration: 1000 })
             }
             setSinalizar(!sinalizar)}} />
         {cadastrarView == true && 
             <CadastrarSinalizacao
                 funcaoVoltar={_ => setCadastrarView(false)}
+                funcaoTerminar={_ => {
+                    setSinalizar(false)
+                    setCadastrarView(false)
+                }}
                 id_usu={props.route.params.id_usu}
                 latitude_sin={novoMarker.latitude.toString()}
                 longitude_sin={novoMarker.longitude.toString()} />}

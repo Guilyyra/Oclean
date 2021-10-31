@@ -14,8 +14,9 @@ import { uploadFoto } from '../components/imgComum'
 
 export default props => {
     const funcaoVoltar = props.funcaoVoltar || null
+    const funcaoTerminar = props.funcaoTerminar || null
 
-    const [foto, setFoto] = useState({ uri: `${server}/img/lucas.jpg`})
+    const [foto, setFoto] = useState({ uri: `${server}/img/banner.png`})
     const [teclado, setTeclado] = useState(false)
     const [medidasTeclado, setMedidasTeclado] = useState({})
 
@@ -46,7 +47,6 @@ export default props => {
     const cadastrarSinalizacao = async () => {
         try{
             linkFoto = await uploadFoto(foto, 'foto_sinalizacao', props.id_usu)
-            console.log(typeof props.latitude_sin)
             const res = await axios.post(`${server}/sinalizacao/cadastrar`, {
                 latitude_sin: props.latitude_sin,
                 longitude_sin: props.longitude_sin,
@@ -59,7 +59,7 @@ export default props => {
                 id_usu_dono: props.id_usu
             })
 
-            console.log("FOI = " + res)
+            funcaoTerminar()
 
         } catch(erro){
             console.log(erro)

@@ -5,9 +5,14 @@ export default props => {
     const titulo = props.titulo || "Clique aqui!"
     const navegacao = props.navegacao || ""
     const funcao = props.funcaoPressionar ? props.funcaoPressionar : _ => {if(navegacao) {navegacao.goBack()}}
+    const top = props.top || 24
+
+    const medidas = {
+        top: top
+    }
 
     return (
-        <TouchableOpacity style={style.VoltarBtn} onPress={ props.funcao || funcao} >
+        <TouchableOpacity style={[style.VoltarBtn, medidas]} onPress={ props.funcao || funcao} >
             <Text style={{fontSize: null, color: "white"}}>{titulo}</Text>
         </TouchableOpacity>
     )
@@ -19,7 +24,6 @@ const style = StyleSheet.create({
         height: 36,
 
         position: "absolute",
-        top: 24,
         left: 24,
 
         alignSelf: "flex-start",

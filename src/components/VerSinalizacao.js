@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, Image, Keyboard } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -16,14 +16,14 @@ export default props => {
 
     const funcaoVoltar = props.funcaoVoltar || null
     const [sinalizacao, setSinalizacao] = useState({
-        foto_sin: `${server}/img/lucas.jpg`,
+        foto_sin: `${server}/img/banner.png`,
         praia_sin: "",
         cidade_sin: "",
         ref_sin: ""
     })
 
     const getSinalizacao = async () => {
-        if(sinalizacao.foto_sin == `${server}/img/lucas.jpg`){
+        if(sinalizacao.foto_sin == `${server}/img/banner.png`){
             try{
                     const sinalizacoes = await axios.get(`${server}/sinalizacao`)
                     setSinalizacao(sinalizacoes.data[0])

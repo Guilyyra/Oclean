@@ -21,6 +21,7 @@ export default props => {
     const somenteTexto = props.somenteTexto || false
     const borderRadius = props.borderRadius || 10
     const estilo = props.estilo || {}
+    const desativado = props.desativado || false
 
     const medidas = [{
         width: largura,
@@ -42,7 +43,7 @@ export default props => {
         }
     }
     return (
-        <TouchableOpacity style={[somenteTexto ? style.btnTexto : style.btn,medidas ]} onPress={funcaoPressionar} >
+        <TouchableOpacity disabled={desativado} style={[somenteTexto ? style.btnTexto : style.btn,medidas ]} onPress={funcaoPressionar} >
             {svg && 
                 <Text 
                     style={[{ alignSelf: svgAlignSelf, marginLeft: svgEsquerda }, !somenteSvg ? {position: "absolute"} : {} ]}>

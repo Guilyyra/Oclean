@@ -16,6 +16,7 @@ import Btn from '../components/Btn'
 export default props => {
     const ImgFundo = require('../img/desenho_praia.png')
     const nome = props.route.params.nome_comu
+    const id_usu = props.route.params.id_usu
 
     var [comu, setComu] = useState({ 
         nome_comu: "Carregando...", 
@@ -23,19 +24,69 @@ export default props => {
         foto_perfil_comu: `${server}/img/lucas.jpg`,
         descricao_comu: "Carregando..."
     })
+
+    const [ingresso, setIngresso] = useState(false)
+    const [membros, setMembros] = useState(0)
     
     const getComunidade = async () => {
         if(comu.nome_comu == 'Carregando...'){
             try{
-            const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
-            setComu(res.data[0])
-            console.log(comu)
+                const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
+                setComu(res.data[0])
+
+                numeroMembros(res.data[0].id_comu)
+
+                const conexao = await axios.post(`${server}/comunidades/membro/verificar`, {
+                    id_usu: id_usu,
+                    id_comu: res.data[0].id_comu
+                })
+
+                if(JSON.stringify(conexao.data[0])){
+                    setIngresso(true)
+                }
+
             } catch(e) {
                 showError(e)
             }
         }
     }
     getComunidade()
+
+    const numeroMembros = async (id_comu) => {
+        const numeroMembros = await axios.get(`${server}/comunidades/${id_comu}/membros`)
+        setMembros(numeroMembros.data)
+    }
+
+    const toggleMembro = async () => {
+        if(ingresso){
+            // sair da comunidade
+            try{
+                const res = await axios.delete(`${server}/comunidades/sair`, {
+                    data: {
+                        id_usu: id_usu,
+                        id_comu: comu.id_comu
+                    }
+                })
+
+                setIngresso(false)
+            } catch(e) {
+                showError(e)
+            }
+        } else{
+            // entrar na comunidade
+            try{
+                const res = await axios.post(`${server}/comunidades/entrar`, {
+                    id_usu: id_usu,
+                    id_comu: comu.id_comu
+                })
+
+                setIngresso(true)
+            } catch(e) {
+                showError(e)
+            }
+        }
+        numeroMembros(comu.id_comu)
+    }
 
     const [tab, setTab] = useState("posts")
     const [selecinado, setSelecionado] = useState("posts")
@@ -94,7 +145,13 @@ export default props => {
                 </View>
                 <View style={style.ContainerDescricao}>
                     <View style={style.BotaoDescricao}>
-                        <Btn  titulo={"Entrar"} tamanhoFonte={16} largura={120} altura={40}/>
+                        <Btn  
+                            titulo={ingresso ? "Membro" : "Entrar"} 
+                            funcaoPressionar={_ => toggleMembro()} 
+                            tamanhoFonte={16} 
+                            largura={120} 
+                            altura={40}
+                            desativado={id_usu == comu.id_ong ? true : false}/>
                     </View>
                     <View style={style.TextoDescricao}>
                         <Text style={{fontSize: 24,}}>
@@ -107,7 +164,7 @@ export default props => {
                             fontSize: 16,
                             color: "rgba(51, 51, 51, 0.6)"
                             }}>
-                            1223 membros
+                            {membros} {membros > 1 ? "membros" : "membro"}
                         </Text>
                         <Text style={{fontSize: 13}}>
                             {comu.descricao_comu}

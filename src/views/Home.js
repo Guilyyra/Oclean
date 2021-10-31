@@ -12,7 +12,7 @@ import Btn from '../components/Btn'
 
 export default  props => {
     // Apagar depois
-    const imagem = `${server}/img/lucas.jpg`
+    const imagem = `${server}/img/default.png`
 
     const parametros = props.route.params
 
@@ -57,7 +57,8 @@ export default  props => {
                         marginVertical={6}
                         svg={<MaterialIcons name="create" size={16} color="#FFF" />}
                         somenteSvg={true}
-                        borderRadius={400}/>
+                        borderRadius={400}
+                        funcaoPressionar={_ => props.navigation.navigate("CriarPost")} />
                 </View>,
                 <View style={{position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.45)"}} />
             ]
@@ -81,12 +82,12 @@ export default  props => {
                             svg={<MaterialIcons name={usu.tipo_usu == "ONG" ? "add" : "create"} size={24} color="#fff" />}
                             somenteSvg={true}
                             borderRadius={400}
-                            funcaoPressionar={() => usu.tipo_usu == "ONG" ? setBotoes(!botoes) : console.log("aaa") } />
+                            funcaoPressionar={() => usu.tipo_usu == "ONG" ? setBotoes(!botoes) : props.navigation.navigate("CriarPost") } />
             </View>
             <ScrollView >
                 <Header navegacao={props.navigation} />
                 <View style={style.Container}>
-                    <Post postTitulo="Tubarão 🐳👍" imgPost={{uri: imagem }}/>
+                    <Post postTitulo="peixe 🐢👍" imgPost={{uri: imagem }}/>
                     <Post postTitulo="Praia 🏜" />
                     <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
                     <Post postTitulo="Praia 🏖" />

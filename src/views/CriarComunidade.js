@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, View, Text, StyleSheet, Image } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Image, StatusBar } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import axios from 'axios'
@@ -24,8 +24,6 @@ export default props => {
 
     const cadastrar = async() => {
 
-        console.log(nome.replace(/ /g, "%20"))
-
         try{
             const res = await axios.post(`${server}/comunidades/cadastrar`, {
                 nome_comu: nome,
@@ -43,6 +41,11 @@ export default props => {
                 banner_comu: linkBanner,
             })
             
+            await axios.post(`${server}/comunidades/entrar`, {
+                id_usu: id,
+                id_comu: comu.data[0].id_comu
+            })
+            
             props.navigation.navigate("Home")
         } catch(erro) {
             switch(JSON.stringify(erro.response.data)){
@@ -58,13 +61,19 @@ export default props => {
     const [nome, setNome] = useState("Comunidade das folhas")
     const [descricao, setDescricao] = useState("Para amantes da briza do mar 🌴🍃🍀🌵, da conversação, da botânica e outros...")
     const [erroNome, setErroNome] = useState("")
-    const [fotoBanner, setFotoBanner] = useState({ uri: `${server}/img/lucas.jpg`})
-    const [fotoPerfil, setFotoPerfil] = useState({ uri: `${server}/img/lucas.jpg`})
+    const [fotoBanner, setFotoBanner] = useState({ uri: `${server}/img/banner.png`})
+    const [fotoPerfil, setFotoPerfil] = useState({ uri: `${server}/img/perfil.png`})
     
 
     return(
         <ScrollView style={[estilo.Flex1, {backgroundColor: "#F3F2F3",}]} >
             <Header navegacao={props.navigation}/>
+            <VoltarBtn 
+                titulo={<MaterialIcons name="arrow-back" size={18} color="#333333"/>}
+                navegacao={props.navigation}
+                style={estilo.VoltarBtn} 
+                top={StatusBar.currentHeight + 80}
+                />
             <Text style={style.titulo}>Criar Comunidade</Text>
             <View style={style.ContainerForm}>
                 <Text style={style.TituloIpt}>Nome:</Text>
@@ -95,7 +104,7 @@ export default props => {
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
                     <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
-                    <BtnImg aspectoLargura={400} aspectoAltura={400} setFoto={setFotoPerfil} />
+                    <BtnImg aspectoLargura={400} aspectoAltura={400} funcaoPressionar={result => setFotoPerfil(result)} />
                 </View>
 
                 <View>
@@ -113,7 +122,7 @@ export default props => {
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
                     <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
-                    <BtnImg aspectoLargura={1500} aspectoAltura={500} setFoto={setFotoBanner} />
+                    <BtnImg aspectoLargura={1500} aspectoAltura={500} funcaoPressionar={result => setFotoBanner(result)} />
                 </View>
                 <View style={{alignSelf: "center", width: "50%"}}>
                     <Btn 

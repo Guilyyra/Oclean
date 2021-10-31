@@ -7,6 +7,7 @@ import Lixo from '../views/Lixo'
 import Perfil from '../views/Perfil'
 import Configuracoes from '../views/Configuracoes'
 import CriarComunidade from '../views/CriarComunidade'
+import CriarPost from '../views/CriarPost'
 
 const Stack = createNativeStackNavigator()
 
@@ -19,9 +20,10 @@ export default props => {
             <Stack.Screen name="Home" component={Home} initialParams={parametros} />
             <Stack.Screen name="Lixo" component={Lixo} initialParams={parametros} />
             <Stack.Screen name="Perfil" component={Perfil} initialParams={parametros} />
-            <Stack.Screen name="Comunidade" component={Comunidade} />
+            <Stack.Screen name="Comunidade" component={Comunidade} initialParams={parametros}/>
             <Stack.Screen name="Configuracoes" component={Configuracoes} />
             <Stack.Screen name="CriarComunidade" component={CriarComunidade} initialParams={parametros} />
+            <Stack.Screen name="CriarPost" component={CriarPost} initialParams={parametros} />
         </Stack.Navigator>
     )
 }
