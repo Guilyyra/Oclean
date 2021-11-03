@@ -34,7 +34,7 @@ export default props => {
         getComunidades()
 
         const views = []
-
+        
         for(var comunidade in comunidades){
             comunidade = comunidades[comunidade]
             views.push(

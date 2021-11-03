@@ -37,8 +37,11 @@ export default props => {
     const cadastrar = async() => {
 
         try{
-            linkFoto = await uploadFoto(foto, 'foto_post', id)
-            
+            if(foto.uri !=   `${server}/img/banner.png`){
+                linkFoto = await uploadFoto(foto, 'foto_post', id)
+            }else{
+                linkFoto = ""
+            }
 
             data = new Date()
 
@@ -48,6 +51,7 @@ export default props => {
                 data_post: data,
                 foto_post: linkFoto,
                 id_usu: id,
+                id_comu: comunidadeEscolhida,
             })
             
             props.navigation.navigate("Home")

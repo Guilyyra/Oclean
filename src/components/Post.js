@@ -10,11 +10,12 @@ export default props => {
     const imgPost = props.imgPost || ""
     const postTitulo = props.postTitulo || ""
     const postDescricao = props.postDescricao || ""
+    const nomeComunidade = props.nomeComunidade
     const largura = 30
     const altura = 30
 
     function imagem() {
-        if(imgPost){
+        if(possuiImagem){
             return (
                 <View style={style.postcontainerImagem}>
                     <Image 

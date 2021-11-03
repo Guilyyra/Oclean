@@ -38,7 +38,7 @@ export default props => {
                 titulo="Logout" 
                 largura="50%" 
                 funcaoPressionar={_ => logout()}/>
-            <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas"})} />
+            <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas2"})} />
         </View>
     )
 }

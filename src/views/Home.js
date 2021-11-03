@@ -20,12 +20,16 @@ export default  props => {
 
     var [usu, setUsu] = useState("Carregando...")
 
+    const [posts, setPosts] = useState()
+
+
     const getUsuario = async () => {
         // if evita múltiplas chamadas para a api
-        if(usu == "Carregando...")  {
+        if(usu == "Carregando...")  {      
             try{
                 const res = await axios.get(`${server}/usuarios/${id}`)
                 setUsu(res.data[0])
+                getComunidades()
             }catch(e){
                 showError(e)
                 res = { erro: "erro"}
@@ -33,6 +37,53 @@ export default  props => {
         }
     }
     getUsuario()
+    
+    const getComunidades = async() => {
+        try{
+            const resPosts = await axios.get(`${server}/post/${id}/buscar`)
+            const postsArray = new Array()
+            for(const post in resPosts.data){
+                const postagens = resPosts.data[post]
+                postsArray.push(postagens)
+            }
+            setPosts(postsArray)
+        } catch(e) {
+            showError(e)
+        }
+    }
+
+
+        
+    const renderizarPosts = () => {
+
+        const postagens = []
+
+        for( var postagem in posts){
+            const postRenderizado = posts[postagem]
+            const possuiImagem = false
+            if(postRenderizado.foto_post != ""){
+                possuiImagem = true
+            }
+
+            // const comunidade = await axios.get(`${server}/comunidades/id/${postRenderizado.id_comu}`)
+            // console.log(comunidade)
+            postagens.push(
+                <Post key={postRenderizado.id_post} 
+                postTitulo={postRenderizado.titulo_post}
+                imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
+                postDescricao={postRenderizado.descricao_post}
+                possuiImagem={possuiImagem}
+                // nomeComunidade={comunidade.data[0].nome_comu}
+                />
+            )
+        }
+
+        return(
+            <>
+                { postagens }
+            </>
+        )
+    }
 
     const BotaoAdd = _ => {
         if(usu.tipo_usu == "ONG"){
@@ -87,10 +138,7 @@ export default  props => {
             <ScrollView >
                 <Header navegacao={props.navigation} />
                 <View style={style.Container}>
-                    <Post postTitulo="peixe 🐢👍" imgPost={{uri: imagem }}/>
-                    <Post postTitulo="Praia 🏜" />
-                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
-                    <Post postTitulo="Praia 🏖" />
+                    { renderizarPosts() }
                 </View>
             </ScrollView>
             {botoes ? BotaoAdd()[2] : []}
