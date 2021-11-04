@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, Text, StyleSheet } from 'react-native'
+import { Image, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native'
 import Estilo from './estilo'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -13,6 +13,9 @@ export default props => {
     const nomeComunidade = props.nomeComunidade
     const largura = 30
     const altura = 30
+    const funcaoPressionar = props.funcaoPressionar || null
+    const nomeUsuario = props.nomeUsuario
+    const tempoAtras = props.tempoAtras
 
     function imagem() {
         if(possuiImagem){
@@ -26,6 +29,7 @@ export default props => {
             )
         }
     }
+
 
     function descricao(){
         if(postDescricao){
@@ -52,7 +56,12 @@ export default props => {
                     }}
                     resizeMode="cover"
                 />
-                <Text style={{fontSize: 13, marginRight: 8}}>Júlio Hiago - Limpa Praias · 30min</Text>
+                <Text style={{color: '#333333', fontWeight: '300', fontSize: 13, marginLeft: 8}}>{nomeUsuario} - </Text>
+                <TouchableOpacity onPress={funcaoPressionar}>
+                    <Text style={{color: '#333333', fontWeight: '300', fontSize: 13, marginLeft: 0}}>{nomeComunidade} </Text>
+                </TouchableOpacity>   
+                <Text style={{color: 'rgba(51, 51, 51, 0.75)', fontWeight: '300', fontSize: 13, marginRight: 0}}> · {tempoAtras}</Text>      
+  
             </View>
             <View style={style.postContainerConteudo}>
                 <Text style={{fontSize: 18, fontWeight: "bold"}}>{postTitulo}</Text>

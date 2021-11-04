@@ -24,7 +24,7 @@ export default props => {
         foto_perfil_comu: `${server}/img/lucas.jpg`,
         descricao_comu: "Carregando..."
     })
-
+    
     const [ingresso, setIngresso] = useState(false)
     const [membros, setMembros] = useState(0)
     

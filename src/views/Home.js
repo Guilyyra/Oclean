@@ -10,6 +10,11 @@ import Header from '../components/Header'
 import Post from '../components/Post'
 import Btn from '../components/Btn'
 
+import moment from 'moment';
+import "moment/min/locales";
+
+moment.locale('pt-br');
+
 export default  props => {
     // Apagar depois
     const imagem = `${server}/img/default.png`
@@ -37,7 +42,6 @@ export default  props => {
         }
     }
     getUsuario()
-    
     const getComunidades = async() => {
         try{
             const resPosts = await axios.get(`${server}/post/${id}/buscar`)
@@ -46,6 +50,7 @@ export default  props => {
                 const postagens = resPosts.data[post]
                 postsArray.push(postagens)
             }
+            console.log(postsArray)
             setPosts(postsArray)
         } catch(e) {
             showError(e)
@@ -73,7 +78,10 @@ export default  props => {
                 imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
                 postDescricao={postRenderizado.descricao_post}
                 possuiImagem={possuiImagem}
-                // nomeComunidade={comunidade.data[0].nome_comu}
+                nomeComunidade={postRenderizado.nome_comu}
+                funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
+                nomeUsuario={postRenderizado.nome_usu}
+                tempoAtras ={moment.utc(postRenderizado.data_post).local().startOf('seconds').fromNow()}
                 />
             )
         }

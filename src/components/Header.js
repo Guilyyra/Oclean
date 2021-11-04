@@ -18,7 +18,7 @@ export default props => (
         <Logo lado={40} />
             
         <Btn
-            largura={24}
+            largura={26}
             altura={24}
             svg={<MaterialIcons name="settings" size={24} color="#333333"/>}
             somenteTexto={true}
