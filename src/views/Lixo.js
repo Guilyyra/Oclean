@@ -12,6 +12,10 @@ import { server } from './../comum'
 
 export default props => {
 
+    const parametros = props.route.params
+
+    const id_usu = parametros.id_usu
+
     const [cadastrarView, setCadastrarView] = useState(false)
     const [origem,setOrigem] = useState(null)
     const [novoMarker, setNovoMarker] = useState(null)
@@ -58,18 +62,21 @@ export default props => {
         const views = []
 
         for(var sinalizacao in sinalizacoes){
-            sinalizacao = sinalizacoes[sinalizacao]
+            let index = sinalizacao
+            let sin = sinalizacoes[sinalizacao]
             
             views.push(
                 <Marker coordinate={{
-                    latitude: Number.parseFloat(sinalizacao.latitude_sin),
-                    longitude: Number.parseFloat(sinalizacao.longitude_sin)
+                    latitude: Number.parseFloat(sin.latitude_sin),
+                    longitude: Number.parseFloat(sin.longitude_sin)
                 }}
-                title={`${sinalizacao.praia_sin} - ${sinalizacao.cidade_sin}`}
-                onPress={() => setVerSin(true)}
+                title={`${sin.praia_sin} - ${sin.cidade_sin}`}
+                onPress={props => {
+                    console.log(sin)
+                    setVerSin(sin)}}
                 pinColor="#63E1FD"
                 description={sinalizacao.status_sin == "Limpo" ? "Já foi limpo" : "Ainda está sujo"}
-                key={sinalizacao.id_sin} />
+                key={index} />
             )
         }
 
@@ -100,7 +107,7 @@ export default props => {
             if(!sinalizar){
                 mapRef.current.animateCamera({
                     center: origem,
-                    zoom: 15,
+                    zoom: 20,
                 }, { duration: 1000 })
             }
             setSinalizar(!sinalizar)}} />
@@ -114,8 +121,8 @@ export default props => {
                 id_usu={props.route.params.id_usu}
                 latitude_sin={novoMarker.latitude.toString()}
                 longitude_sin={novoMarker.longitude.toString()} />}
-        {verSin == true &&
-            <VerSinalizacao funcaoVoltar={_ => setVerSin(false)} />}
+        {verSin != false &&
+            <VerSinalizacao sin={verSin} id_usu={id_usu} funcaoVoltar={_ => setVerSin(false)} />}
     </View>
     )
 }

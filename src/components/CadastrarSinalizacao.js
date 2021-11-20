@@ -90,7 +90,7 @@ export default props => {
                     </View>
                     <View style={{justifyContent: "center", flexDirection: "row", marginTop: 8}}>
                         <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="white" />
-                        <BtnImg cor="white" aspectoLargura={1500} aspectoAltura={500} setFoto={setFoto} />
+                        <BtnImg cor="white" aspectoLargura={1500} aspectoAltura={500} funcaoPressionar={setFoto} />
                     </View>
                     
                     <View style={{width: "80%"}}>

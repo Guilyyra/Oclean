@@ -50,7 +50,6 @@ export default  props => {
                 const postagens = resPosts.data[post]
                 postsArray.push(postagens)
             }
-            console.log(postsArray)
             setPosts(postsArray)
         } catch(e) {
             showError(e)
