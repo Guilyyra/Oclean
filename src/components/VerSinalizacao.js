@@ -11,6 +11,7 @@ import BtnImg from './BtnImg'
 import IptFundo from './InputFundo'
 import Btn from './Btn'
 import CadastrarLimp from './CadastrarLimp'
+import VerLimp from './VerLimp'
 import { uploadFoto } from '../components/imgComum'
 
 export default props => {
@@ -19,34 +20,32 @@ export default props => {
     const ImgPerfil = require('../img/oclean_logo.png')
     const funcaoVoltar = props.funcaoVoltar || null
     const sin = props.sin
-    //console.log("III + " + JSON.stringify(sin))
-
-    const [sinalizacao, setSinalizacao] = useState({
-        foto_sin: `${server}/img/banner.png`,
-        praia_sin: "",
-        cidade_sin: "",
-        ref_sin: ""
-    })
 
     const [dono, setDono] = useState({
         nome_usu: "carregando..."
     })
+    const [donoLimpo, setDonoLimpo] = useState({
+        nome_usu: "carregando..."
+    })
 
     const [cadastrarLimp, setCadastrarLimp] = useState(false)
+    const [verLimp, setVerLimp] = useState(false)
 
     const getSinalizacao = async () => {
-        if(sinalizacao.foto_sin == `${server}/img/banner.png`){
-            try{
-                    const sinalizacoes = await axios.get(`${server}/sinalizacao`)
-                    setSinalizacao(sinalizacoes.data[0])
-                    const dono = await axios.get(`${server}/usuarios/${sin.id_usu_dono}`)
-                    setDono(dono.data[0])
-            }catch(erro){
-                console.log(erro)
+        try{
+            const dono = await axios.get(`${server}/usuarios/${sin.id_usu_dono}`)
+            setDono(dono.data[0])
+            if(sin.status_sin == "limpo"){
+                const dono = await axios.get(`${server}/usuarios/${sin.id_usu_limpo}`)
+                setDonoLimpo(dono.data[0])
             }
+        }catch(erro){
+            console.log(erro)
         }
     }
-    getSinalizacao()
+    if(dono.nome_usu == "carregando..."){
+        getSinalizacao()
+    }
 
     const renderStatus = () => {
         if(sin.status_sin == 'sujo'){
@@ -64,9 +63,9 @@ export default props => {
         }
     }
 
-    const getSinDate = () => {
-        data = sin.data_sin
-        return data.slice(8, 10) + "/" + data.slice(5,7) + "/" + data.slice(2,4)
+    const getDate = (date) => {
+        horario = parseInt(date.slice(11,13)) - 3 + date.slice(13,16)
+        return date.slice(8, 10) + "/" + date.slice(5,7) + "/" + date.slice(2,4) + " " + horario
     }
 
     return(
@@ -113,11 +112,33 @@ export default props => {
                         }}
                         resizeMode="cover"
                     />
-                    <Text style={{color: "white", fontSize: 12}}>Sinalizado por {dono.nome_usu} · {getSinDate()}</Text>
+                    <Text style={{color: "white", fontSize: 12}}>Sinalizado por {dono.nome_usu} · {getDate(sin.data_sin)}</Text>
                 </View>
+
+                {sin.status_sin == "limpo" && <View style={{width: '80%',flexDirection: 'row', alignItems: 'center', marginTop: 16}}>
+                    <Image 
+                        source={ImgPerfil}
+                        style={{
+                            width: 30,
+                            height: 30,
+                            marginRight: 12,               
+                        }}
+                        resizeMode="cover"
+                    />
+                    <Text style={{color: "white", fontSize: 12}}>Limpo por {donoLimpo.nome_usu} · {getDate(sin.data_limp)}</Text>
+                </View>}
                 
-                <Btn estilo={style.btnLimpar} corFonte="#333333" titulo="Limpar" tamanhoFonte={20} funcaoPressionar={async () => {
-                    setCadastrarLimp(!cadastrarLimp)
+                
+                <Btn estilo={style.btnLimpar} 
+                    corFonte="#333333" 
+                    titulo={sin.status_sin == "sujo" ? "Limpar" : "Ver Limpeza"} 
+                    tamanhoFonte={20} 
+                    funcaoPressionar={async () => {
+                        if(sin.status_sin == "sujo"){
+                            setCadastrarLimp(!cadastrarLimp)
+                        } else {
+                            setVerLimp(!verLimp)
+                        }
                 }} />
 
                 {sin.id_usu_dono == id_usu && 
@@ -126,8 +147,11 @@ export default props => {
                     funcaoVoltar()
                 }} />}
 
+                {verLimp && 
+                    <VerLimp fechar={() => setVerLimp(false)} sin={sin} dono_limpo={donoLimpo} />}
+
                 {cadastrarLimp && 
-                    <CadastrarLimp />}
+                    <CadastrarLimp fechar={() => setCadastrarLimp(false)} id_sin={sin.id_sin} id_usu={props.id_usu} terminar={funcaoVoltar} />}
 
             </View>
         </View>
@@ -179,7 +203,7 @@ const style = StyleSheet.create({
     btnLimpar: {
         height: 40,
         width: "55%",
-        marginTop: 64,
+        marginTop: 24,
         marginBottom: 40,
 
         backgroundColor: "white",

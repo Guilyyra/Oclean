@@ -58,8 +58,8 @@ export default props => {
         }
     }
 
-    const [nome, setNome] = useState("Comunidade das folhas")
-    const [descricao, setDescricao] = useState("Para amantes da briza do mar 🌴🍃🍀🌵, da conversação, da botânica e outros...")
+    const [nome, setNome] = useState("") // Comunidade das folhas
+    const [descricao, setDescricao] = useState("") // Para amantes da briza do mar 🌴🍃🍀🌵, da conversação, da botânica e outros...
     const [erroNome, setErroNome] = useState("")
     const [fotoBanner, setFotoBanner] = useState({ uri: `${server}/img/banner.png`})
     const [fotoPerfil, setFotoPerfil] = useState({ uri: `${server}/img/perfil.png`})

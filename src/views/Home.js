@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, StyleSheet, View, Text  } from 'react-native'
+import { ScrollView, StyleSheet, View, Text, Image  } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import axios from 'axios'
@@ -84,6 +84,49 @@ export default  props => {
                 />
             )
         }
+
+        if(!postagens[0]){
+            postagens.push(
+                <View key={1} style={{width: "100%", alignItems: "center"}}>
+                    <Text style={{fontSize: 28, textAlign: "center", fontWeight: "bold", color: "#333333"}}>
+                        Você ainda não entrou em nenhuma comunidade!
+                    </Text>
+                    <View style={{width: "80%"}}>
+                        <Text style={{fontSize: 16, textAlign: "center", fontWeight: "100", color: "#333333"}}>
+                            Entre em alguma comunidade para conseguir ver posts de outras pessoas
+                        </Text>
+                    </View>
+                    <Image 
+                        source={require('../img/cryp_dead.png')} 
+                        style={{
+                            width: 200,
+                            height: 200,
+                            marginTop: 24               
+                        }}
+                        resizeMode="cover"
+                    />
+                    <View style={{width: "100%", alignItems: "flex-start", marginTop: 28}}>
+                        <Text style={{fontSize: 22, fontWeight: "bold", color: "#333333", marginLeft: 8}}>
+                            Sugestões de comunidades
+                        </Text>
+                        <View
+                            style={{
+                                width: "30%",
+                                height: 200,
+                                marginTop: 16,
+                                marginLeft: 8,
+                                borderStyle: "solid",
+                                borderColor: "black",
+                                borderWidth: 3,
+                                borderRadius: 30
+                            }}
+                        />
+                    </View> 
+                </View>
+            )
+        }
+
+        
 
         return(
             <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, StatusBar, Image, Keyboard } from 'react-native'
 
 import ComunidadeOpcao from './ComunidadeOpcao'
@@ -55,7 +55,7 @@ export default props => {
         )
     }
 
-    const [erro, setErro] = useState("")
+    const [erro, setErro] = useState("") 
 
     const proximaTela = () => {
         if(comunidadeEscolhida == -1){

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ScrollView, View, Text, StyleSheet, Image, StatusBar } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -37,7 +37,7 @@ export default props => {
     const cadastrar = async() => {
 
         try{
-            if(foto.uri !=   `${server}/img/banner.png`){
+            if(foto.uri !=   `${server}/img/placeholder.png`){
                 linkFoto = await uploadFoto(foto, 'foto_post', id)
             }else{
                 linkFoto = ""
@@ -62,10 +62,25 @@ export default props => {
 
     const [titulo, setTitulo] = useState("")
     const [descricao, setDescricao] = useState("")
-    const [foto, setFoto] = useState({ uri: `${server}/img/banner.png`})
+    const [foto, setFoto] = useState({ uri: `${server}/img/placeholder.png`}) // { uri: `${server}/img/banner.png`}
     const [comunidadeEscolhida, setComunidadeEscolhida] = useState(-1)
 
     const [opcoes, setOpcoes] = useState(true)
+
+    /*const onChangeOpcoes = ({ opcoes }) => {
+        setOpcoes(opcoes);
+    };
+
+    useEffect(() => {
+        opcoes.addEventListener('change', onChangeOpcoes);
+        return () => {
+          opcoes.removeEventListener('change', onChangeOpcoes);
+        };
+    }, []);*/
+
+    const mudar = () => {
+        setOpcoes(false)
+    }
 
     return(
         <>
@@ -73,7 +88,7 @@ export default props => {
                 comunidadeEscolhida={comunidadeEscolhida}
                 setComunidadeEscolhida={setComunidadeEscolhida}
                 id_usu={id} 
-                funcaoProximo={_ => setOpcoes(false)} />}
+                funcaoProximo={() => setOpcoes(false)} />}
             <ScrollView style={[estilo.Flex1, {backgroundColor: "#F3F2F3",}]} >
                 
                 <Header navegacao={props.navigation}/>
@@ -98,6 +113,7 @@ export default props => {
                     
                     <View style={{ width: "100%", alignItems: "center"}}>
                     <Text style={[style.TituloIpt, {alignSelf: "flex-start"}]}>Adicionar Foto:</Text>
+                        {foto &&
                             <Image 
                                 source={foto} 
                                 style={{
@@ -106,7 +122,7 @@ export default props => {
                                     height: 300,  
                                     marginBottom: 16
                             }}
-                            resizeMode="contain" />
+                            resizeMode="contain" />}
 
                     </View>
                     <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>

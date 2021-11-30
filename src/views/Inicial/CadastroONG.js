@@ -23,11 +23,11 @@ export default props => {
 
     const [positionPrimeiro, setPositionPrimeiro] = useState(null)
 
-    const [nome, setNome] = useState("ONG Exemplo")
-    const [endereco, setEndereco] = useState("São Paulo - SP")
-    const [telefone, setTelefone] = useState("(11)1111-11111")
-    const [email, setEmail] = useState("ong@gmail.com")
-    const [senha, setSenha] = useState("123456")
+    const [nome, setNome] = useState("") // ONG Exemplo
+    const [endereco, setEndereco] = useState("") // São Paulo - SP
+    const [telefone, setTelefone] = useState("") // (11)1111-11111
+    const [email, setEmail] = useState("") // ong@gmail.com
+    const [senha, setSenha] = useState("") // 123456
 
     mudarStyle = () => {
         Keyboard.dismiss()

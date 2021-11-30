@@ -17,8 +17,8 @@ import { server, showError } from '../../comum'
 
 export default props => {
 
-    const [email, setEmail] = useState("lucas2@gmail.com")
-    const [senha, setSenha] = useState("123456")
+    const [email, setEmail] = useState("") // lucas2@gmail.com
+    const [senha, setSenha] = useState("") // 123456
     
     const login = async () => {
         try{

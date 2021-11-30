@@ -28,14 +28,14 @@ export default props => {
           if (status === 'granted') {
                 let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true })
                 setOrigem({
-                    latitude: location.coords.latitude,//-23.626178,
-                    longitude: location.coords.longitude,//-46.656873,
-                    latitudeDelta: 0.000922,//0.00922
-                    longitudeDelta: 0.000421//0.00421
+                    latitude: /*location.coords.latitude*/-23.626178,//-23.626178,
+                    longitude: /*location.coords.longitude*/-46.656873,//-46.656873,
+                    latitudeDelta: 0.0922,//0.00922
+                    longitudeDelta: 0.0421//0.00421
                 })
                 setNovoMarker({
-                    latitude: location.coords.latitude,//location.coords.latitude-23.626178
-                    longitude: location.coords.longitude})//location.coords.longitude-46.65873})
+                    latitude: /*location.coords.latitude*/-23.626178,//location.coords.latitude-23.626178
+                    longitude: /*location.coords.longitude*/-46.65873})//location.coords.longitude-46.65873})
           }  else {
               throw new Error('Location permission not granted')
           }
@@ -94,7 +94,7 @@ export default props => {
             ref={mapRef}
             style={style.map}
             initialRegion={origem}
-            showsUserLocation={true}
+            showsUserLocation={false}
             mapPadding={{top:StatusBar.currentHeight + 16,right:0,bottom:0,left:0}}>
                 {sinalizar == true && <Marker onDragEnd={res => setNovoMarker(res.nativeEvent.coordinate)} 
                     draggable={true} coordinate={origem}/>}
