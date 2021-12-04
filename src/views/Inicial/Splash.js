@@ -4,12 +4,10 @@ import { View, ActivityIndicator, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 
-import LogoImg from '../../img/oclean_logo.png'
+import splash from '../../img/splash.png'
 import estilo from '../../components/estilo'
 
 export default class AuthOrApp extends Component {
-
-    
 
     componentDidMount = async () => {
         const userDataJson = await AsyncStorage.getItem('userData')
@@ -31,7 +29,7 @@ export default class AuthOrApp extends Component {
     render() {
         return (
             <View style={[estilo.Flex1, { justifyContent: 'center', alignItems: 'center'} ]}>
-                <Image source={LogoImg} style={{ width: '30%' }} resizeMode='contain' />
+                <Image source={splash} style={{width: "100%", height: "100%"}} />
             </View>
         )
     }

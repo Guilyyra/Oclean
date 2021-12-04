@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native'
+import { Image, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, TouchableOpacityBase } from 'react-native'
 import Estilo from './estilo'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -16,6 +16,8 @@ export default props => {
     const funcaoPressionar = props.funcaoPressionar || null
     const nomeUsuario = props.nomeUsuario
     const tempoAtras = props.tempoAtras
+    const id_post = props.id_post 
+    const navigation = props.navigation
 
     function imagem() {
         if(possuiImagem){
@@ -45,7 +47,7 @@ export default props => {
     }
 
     return(
-        <View style={style.postContainer}>
+        <TouchableOpacity style={style.postContainer} onPress={() => navigation.navigate("Post", { id_post: id_post})}>
             <View style={style.InformacoesUsuarioContainer}>
                 <Image 
                     source={ImgPerfil}
@@ -75,7 +77,7 @@ export default props => {
                 </View>
                 <MaterialIcons name="share" size={24} color="#333333" />
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

@@ -8,6 +8,7 @@ import Perfil from '../views/Perfil'
 import Configuracoes from '../views/Configuracoes'
 import CriarComunidade from '../views/CriarComunidade'
 import CriarPost from '../views/CriarPost'
+import Post from '../views/Post'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +25,7 @@ export default props => {
             <Stack.Screen name="Configuracoes" component={Configuracoes} />
             <Stack.Screen name="CriarComunidade" component={CriarComunidade} initialParams={parametros} />
             <Stack.Screen name="CriarPost" component={CriarPost} initialParams={parametros} />
+            <Stack.Screen name="Post" component={Post} initialParams={parametros} />
         </Stack.Navigator>
     )
 }

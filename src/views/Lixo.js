@@ -70,12 +70,11 @@ export default props => {
                     latitude: Number.parseFloat(sin.latitude_sin),
                     longitude: Number.parseFloat(sin.longitude_sin)
                 }}
-                title={`${sin.praia_sin} - ${sin.cidade_sin}`}
                 onPress={props => {
                     console.log(sin)
                     setVerSin(sin)}}
                 pinColor="#63E1FD"
-                description={sinalizacao.status_sin == "Limpo" ? "Já foi limpo" : "Ainda está sujo"}
+                tracksViewChanges={false}
                 key={index} />
             )
         }

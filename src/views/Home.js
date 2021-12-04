@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, StyleSheet, View, Text, Image  } from 'react-native'
+import { ScrollView, StyleSheet, View, Text, Image, RefreshControl  } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import axios from 'axios'
@@ -73,6 +73,7 @@ export default  props => {
             // console.log(comunidade)
             postagens.push(
                 <Post key={postRenderizado.id_post} 
+                id_post={postRenderizado.id_post}
                 postTitulo={postRenderizado.titulo_post}
                 imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
                 postDescricao={postRenderizado.descricao_post}
@@ -81,6 +82,7 @@ export default  props => {
                 funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
                 nomeUsuario={postRenderizado.nome_usu}
                 tempoAtras ={moment.utc(postRenderizado.data_post).local().startOf('seconds').fromNow()}
+                navigation={props.navigation}
                 />
             )
         }
@@ -169,23 +171,39 @@ export default  props => {
     }
 
     const [botoes, setBotoes] = useState(false)
+    const [refresh, setRefresh] = useState(false)
+
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefresh(true);
+        getComunidades().then(() => setRefresh(false));
+    }, []);
 
     return(
         <>
-            <View style={style.addBtn}>
+            <View style={[style.addBtn, botoes ? {} : {width: 65, height: 65}]}>
+                {/* Pequeno esquerda */}
+                {botoes ? BotaoAdd()[0] : []}
                     {/* Pequeno esquerda */}
-                    {botoes ? BotaoAdd()[0] : []}
-                    {/* Pequeno esquerda */}
-                        {botoes ? BotaoAdd()[1] : []}
-                        <Btn
-                            altura={65}
-                            largura={65}
-                            svg={<MaterialIcons name={usu.tipo_usu == "ONG" ? "add" : "create"} size={24} color="#fff" />}
-                            somenteSvg={true}
-                            borderRadius={400}
-                            funcaoPressionar={() => usu.tipo_usu == "ONG" ? setBotoes(!botoes) : props.navigation.navigate("CriarPost") } />
+                    {botoes ? BotaoAdd()[1] : []}
+                    <Btn
+                        altura={65}
+                        largura={65}
+                        svg={<MaterialIcons name={usu.tipo_usu == "ONG" ? "add" : "create"} size={24} color="#fff" />}
+                        somenteSvg={true}
+                        borderRadius={400}
+                        funcaoPressionar={() => usu.tipo_usu == "ONG" ? setBotoes(!botoes) : props.navigation.navigate("CriarPost") } />
             </View>
-            <ScrollView >
+            <ScrollView 
+                refreshControl={
+                    <RefreshControl
+                      refreshing={refresh}
+                      onRefresh={onRefresh}
+                    />
+                }>
                 <Header navegacao={props.navigation} />
                 <View style={style.Container}>
                     { renderizarPosts() }

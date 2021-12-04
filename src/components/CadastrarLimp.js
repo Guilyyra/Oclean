@@ -22,18 +22,14 @@ export default props => {
     const [foto, setFoto] = useState({ uri: `${server}/img/placeholder.png`})
     const [descricao, setDescricao] = useState("")
 
-    const [erroFoto, setErroFoto] = useState("")
-    const [erroDesc, setErroDesc] = useState("")
+    const [erro, setErro] = useState("")
 
     const cadastrar = async () => {
-        setErroFoto("")
-        setErroDesc("")
+        setErro("")
         try{ 
             // Precisa de otimização (Talvez um switch?)
-            if(foto.uri == `${server}/img/placeholder.png`){
-                setErroFoto("Coloque alguma foto!")
-            } else if(descricao == "") {
-                setErroDesc("Coloque alguma descrição!")
+            if(foto.uri == `${server}/img/placeholder.png` || descricao == ""){
+                setErro("Insira todas as informações!")
             } else {
                 const data_limp = new Date()
                 linkFoto = await uploadFoto(foto, 'foto_sinalizacao', props.id_usu)
@@ -81,15 +77,14 @@ export default props => {
                         <BtnImg permitirEdicao={true} aspectoLargura={400} aspectoAltura={150} funcaoPressionar={async result => {
                             setFoto(result)}}/>
                     </View>
-                    <Text style={{fontSize: 10, color: "red", marginBottom: 16}}>{erroFoto}</Text>
 
                     <View style={{width: "80%"}}>
                         <Text style={{color: "#333333", fontSize: 22, marginBottom: 8, fontWeight: "bold"}}>Descrição</Text>
                         <IptFundo placeholder="Ex: Copacabana" largura="100%" valor={descricao} setValor={setDescricao}/>
-                        <Text style={{fontSize: 10, color: "red"}}>{erroDesc}</Text>
                     </View>
 
                     <Btn estilo={style.btnLimpar} corFonte="white" titulo="Limpar" tamanhoFonte={20} funcaoPressionar={async () => cadastrar()} />
+                    <Text style={{fontSize: 10, color: "red", marginTop: 8,marginBottom: 40}}>{erro}</Text>
             </View>
         </View>
     )
@@ -125,8 +120,7 @@ const style = StyleSheet.create({
     btnLimpar: {
         height: 40,
         width: "55%",
-        marginTop: 24,
-        marginBottom: 40,
+        marginTop: 16,
 
         backgroundColor: "#333333",
     }
