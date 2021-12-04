@@ -42,7 +42,8 @@ export default props => {
                 onBlur = {() => valor ? setFocado(true) : setFocado(false)}
                 placeholderTextColor = "#C4C4C4"
                 multiline = {multiline}
-            />
+            >
+            </TextInput>
         </>
     )
 }

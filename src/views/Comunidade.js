@@ -13,6 +13,9 @@ import axios from 'axios'
 import { server, showError } from '../comum'
 import Btn from '../components/Btn'
 
+import moment from 'moment';
+import "moment/min/locales";
+
 export default props => {
     const ImgFundo = require('../img/desenho_praia.png')
     const nome = props.route.params.nome_comu
@@ -27,12 +30,28 @@ export default props => {
     
     const [ingresso, setIngresso] = useState(false)
     const [membros, setMembros] = useState(0)
+
+    const [posts, setPosts] = useState()
     
     const getComunidade = async () => {
         if(comu.nome_comu == 'Carregando...'){
             try{
                 const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
                 setComu(res.data[0])
+                try{
+                    const resPosts = await axios.get(`${server}/post/${res.data[0].id_comu}/comunidade`)
+                    console.log(resPosts.data)
+                    const postsArray = new Array()
+                    for(const post in resPosts.data){
+                        const postagens = resPosts.data[post]
+                        postsArray.push(postagens)
+                    }
+                    setPosts(postsArray)
+                }catch(e){
+                    console.log(e)
+                    showError(e)
+                    res = {erro: "erro"}
+                }
 
                 numeroMembros(res.data[0].id_comu)
 
@@ -48,6 +67,7 @@ export default props => {
             } catch(e) {
                 showError(e)
             }
+            
         }
     }
     getComunidade()
@@ -86,6 +106,42 @@ export default props => {
             }
         }
         numeroMembros(comu.id_comu)
+    }
+
+    const renderizarPosts = () => {
+
+        const postagens = []
+
+        for( var postagem in posts){
+            const postRenderizado = posts[postagem]
+            const possuiImagem = false
+            if(postRenderizado.foto_post != ""){
+                possuiImagem = true
+            }
+
+            // const comunidade = await axios.get(`${server}/comunidades/id/${postRenderizado.id_comu}`)
+            // console.log(comunidade)
+            postagens.push(
+                <Post 
+                    key={postRenderizado.id_post} 
+                    id_post={postRenderizado.id_post}
+                    postTitulo={postRenderizado.titulo_post}
+                    imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
+                    postDescricao={postRenderizado.descricao_post}
+                    possuiImagem={possuiImagem}
+                    nomeComunidade={comu.nome_comu}
+                    funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
+                    nomeUsuario={postRenderizado.nome_usu}
+                    tempoAtras ={moment.utc(postRenderizado.data_post).local().startOf('seconds').fromNow()}
+                    navigation={props.navigation}
+                />
+            )
+        }
+        return(
+            <View style={{alignItems: 'center'}}>
+                { postagens }
+            </View>
+        )
     }
 
     const [tab, setTab] = useState("posts")
@@ -185,7 +241,7 @@ export default props => {
                         <View style={selecinado == "eventos" ? { borderRadius: 100,height: 3, width: 16, backgroundColor: '#FEDB41'}: []}></View>
                     </TouchableOpacity>
                 </View>
-                {tab == "posts" ? PostAdd() : []}
+                {tab == "posts" ? renderizarPosts() : []}
                 {tab == "eventos" ? EventoAdd() : []}
             </SafeAreaView>
         </ScrollView>
