@@ -12,6 +12,7 @@ export default props => {
     const largura = props.largura || "70%"
     const altura = props.altura || 40
     const marginBottom = props.marginBottom || 16
+    const marginTop = props.marginTop || 0
 
     const escondido = props.escondido || false
     const tipoTeclado = props.tipoTeclado || "default"
@@ -22,7 +23,8 @@ export default props => {
     const medidas = {
         width: largura,
         height: altura,
-        marginBottom: marginBottom
+        marginBottom: marginBottom,
+        marginTop: marginTop
     }
 
     const [focado, setFocado] = useState(false) 

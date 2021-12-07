@@ -15,7 +15,7 @@ function createFormData(photo, preId, id_usu) {
     return data;
 };
 
-async function uploadFoto(photo, preId, id_usu,) {
+async function uploadFoto(photo, preId, id_usu) {
     try{
         const img = createFormData(photo, preId,id_usu)
         const res = await axios.post(`${server}/api/upload`, img, {

@@ -1,23 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, TouchableOpacityBase } from 'react-native'
 import Estilo from './estilo'
 import { MaterialIcons } from '@expo/vector-icons'
 
+import axios from 'axios'
+import { server, showError } from '../comum'
+
+import moment from 'moment';
+import "moment/min/locales";
+
+moment.locale('pt-br');
+
 export default props => {
-    const ImgPerfil = require('../img/oclean_logo.png')
+    const ImgUserPlaceholder = `${server}/img/user_placeholder.png`
     const possuiImagem = props.possuiImagem || false
-    // Ao utilizar o post.js, o imgPost vai ter que ser um require("url_da_img")
-    const imgPost = props.imgPost || ""
-    const postTitulo = props.postTitulo || ""
-    const postDescricao = props.postDescricao || ""
-    const nomeComunidade = props.nomeComunidade
-    const largura = 30
-    const altura = 30
+    const post = props.post
     const funcaoPressionar = props.funcaoPressionar || null
-    const nomeUsuario = props.nomeUsuario
-    const tempoAtras = props.tempoAtras
-    const id_post = props.id_post 
+    const tempoAtras = moment.utc(post.data_post).local().startOf('seconds').fromNow()
     const navigation = props.navigation
+
+    const [usu, setUsu] = useState({
+        foto_perfil: '',
+    })
+
+    const getUsuario = async() => {
+        try{
+            const resUsu = await axios.get(`${server}/usuarios/${post.id_usu}`)
+            setUsu(resUsu.data[0])
+        } catch(e) {
+            showError(e)
+        }
+    }
+    if(!usu.id_usu){
+        getUsuario()
+    }
 
     function imagem() {
         if(possuiImagem){
@@ -25,58 +41,68 @@ export default props => {
                 <View style={style.postcontainerImagem}>
                     <Image 
                         style={style.postImagem}
-                        source={imgPost}
+                        source={{ uri: post.foto_post.replace(/"/g, "")}}
                         />
                 </View>
             )
         }
     }
 
-
     function descricao(){
-        if(postDescricao){
+        if(post.descricao_post){
             return (
                 <Text style={{
                     fontSize: 14,
                     color: "rgba(51, 51, 51, 0.8)",
                     marginTop: 8}}>
-                    {postDescricao}
+                    {post.descricao_post.length < 150 ?
+                        post.descricao_post
+                    :
+                        post.descricao_post.subString(0,147) + '...'}
                 </Text>
             )
         }
     }
 
     return(
-        <TouchableOpacity style={style.postContainer} onPress={() => navigation.navigate("Post", { id_post: id_post})}>
+        <TouchableOpacity style={style.postContainer} onPress={() => navigation.navigate("Post", { id_post: post.id_post})}>
             <View style={style.InformacoesUsuarioContainer}>
                 <Image 
-                    source={ImgPerfil}
+                    source={{ uri: !usu.foto_perfil ? ImgUserPlaceholder : usu.foto_perfil.replace(/"/g, "")}}
                     style={{
-                        width: largura,
-                        height: altura,
-                        marginRight: 12,               
+                        width: 30,
+                        height: 30,
+                        marginRight: 0,
+                        borderRadius: 15     
                     }}
                     resizeMode="cover"
                 />
-                <Text style={{color: '#333333', fontWeight: '300', fontSize: 13, marginLeft: 8}}>{nomeUsuario} - </Text>
-                <TouchableOpacity onPress={funcaoPressionar}>
-                    <Text style={{color: '#333333', fontWeight: '300', fontSize: 13, marginLeft: 0}}>{nomeComunidade} </Text>
-                </TouchableOpacity>   
-                <Text style={{color: 'rgba(51, 51, 51, 0.75)', fontWeight: '300', fontSize: 13, marginRight: 0}}> · {tempoAtras}</Text>      
+                <View style={{marginLeft: 8}}>
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Perfil", {id_usu_perfil: usu.id_usu})}>
+                            <Text style={{color: '#333333', fontWeight: '300', fontSize: 13}}>{
+                                post.nome_usu.length < 20 ?
+                                    post.nome_usu
+                                :
+                                    post.nome_usu.substring(0,20) + "..."} - </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={funcaoPressionar}>
+                            <Text style={{color: '#333333', fontWeight: '300', fontSize: 13, marginLeft: 0}}>{
+                                post.nome_comu.length < 30 ?
+                                    post.nome_comu
+                                :
+                                    post.nome_comu.substring(0,30) + "..."}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={{color: 'rgba(51, 51, 51, 0.75)', fontWeight: '300', fontSize: 13}}>{tempoAtras}</Text>  
+                </View>    
   
             </View>
             <View style={style.postContainerConteudo}>
-                <Text style={{fontSize: 18, fontWeight: "bold"}}>{postTitulo}</Text>
+                <Text style={{fontSize: 18, fontWeight: "bold"}}>{post.titulo_post}</Text>
                 {descricao()}
             </View>
             {imagem()}
-            <View style={style.postContainerCurtidas}>
-                <View style={{ flexDirection: "row", alignItems: "center"}}>
-                    <MaterialIcons style={{ marginRight: 8}}name="thumb-up" size={24} color="#333333" />
-                    <Text>18</Text>
-                </View>
-                <MaterialIcons name="share" size={24} color="#333333" />
-            </View>
         </TouchableOpacity>
     )
 }
@@ -104,7 +130,7 @@ const style = StyleSheet.create({
         borderRadius: 16,
     },
     InformacoesUsuarioContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
         paddingLeft: 16,
         paddingTop: 16,
         alignItems: "center",

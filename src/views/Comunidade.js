@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
+import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, RefreshControl} from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import estilo from '../components/estilo'
@@ -25,57 +25,64 @@ export default props => {
         nome_comu: "Carregando...", 
         banner_comu: `${server}/img/lucas.jpg`,
         foto_perfil_comu: `${server}/img/lucas.jpg`,
-        descricao_comu: "Carregando..."
+        descricao_comu: "Carregando...",
+        id_ong: -1
     })
     
     const [ingresso, setIngresso] = useState(false)
     const [membros, setMembros] = useState(0)
 
     const [posts, setPosts] = useState()
+    const [ong, setOng] = useState({
+        nome_usu: 'Carregando...'
+    })
     
     const getComunidade = async () => {
-        if(comu.nome_comu == 'Carregando...'){
-            try{
-                const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
-                setComu(res.data[0])
-                try{
-                    const resPosts = await axios.get(`${server}/post/${res.data[0].id_comu}/comunidade`)
-                    console.log(resPosts.data)
-                    const postsArray = new Array()
-                    for(const post in resPosts.data){
-                        const postagens = resPosts.data[post]
-                        postsArray.push(postagens)
-                    }
-                    setPosts(postsArray)
-                }catch(e){
-                    console.log(e)
-                    showError(e)
-                    res = {erro: "erro"}
-                }
+        try{
+            const res = await axios.get(`${server}/comunidades/${nome.replace(/ /g, "%20")}`)
+            setComu(res.data[0])
 
-                numeroMembros(res.data[0].id_comu)
-
-                const conexao = await axios.post(`${server}/comunidades/membro/verificar`, {
-                    id_usu: id_usu,
-                    id_comu: res.data[0].id_comu
-                })
-
-                if(JSON.stringify(conexao.data[0])){
-                    setIngresso(true)
-                }
-
-            } catch(e) {
-                showError(e)
+            const resPosts = await axios.get(`${server}/post/${res.data[0].id_comu}/comunidade`)
+            const postsArray = new Array()
+            for(const post in resPosts.data){
+                const postagens = resPosts.data[post]
+                postsArray.push(postagens)
             }
-            
+            setPosts(postsArray)
+
+            const resOng = await axios.get(`${server}/usuarios/${res.data[0].id_ong}`)
+            setOng(resOng.data[0])
+
+            numeroMembros(res.data[0].id_comu)
+
+            const conexao = await axios.post(`${server}/comunidades/membro/verificar`, {
+                id_usu: id_usu,
+                id_comu: res.data[0].id_comu
+            })
+
+            if(JSON.stringify(conexao.data[0])){
+                setIngresso(true)
+            }
+
+        } catch(e) {
+                showError(e)
         }
     }
-    getComunidade()
+    if(comu.nome_comu == 'Carregando...' || ong.nome_comu == 'Carregando'){
+        getComunidade()
+    }
 
     const numeroMembros = async (id_comu) => {
         const numeroMembros = await axios.get(`${server}/comunidades/${id_comu}/membros`)
         setMembros(numeroMembros.data)
     }
+
+    const [refresh, setRefresh] = useState(false)
+
+    const onRefresh = React.useCallback(() => {
+        setRefresh(true);
+        getComunidade().then(() => setRefresh(false));
+    }, []);
 
     const toggleMembro = async () => {
         if(ingresso){
@@ -124,19 +131,29 @@ export default props => {
             postagens.push(
                 <Post 
                     key={postRenderizado.id_post} 
-                    id_post={postRenderizado.id_post}
-                    postTitulo={postRenderizado.titulo_post}
-                    imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
-                    postDescricao={postRenderizado.descricao_post}
+                    post={postRenderizado}
                     possuiImagem={possuiImagem}
-                    nomeComunidade={comu.nome_comu}
                     funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
-                    nomeUsuario={postRenderizado.nome_usu}
-                    tempoAtras ={moment.utc(postRenderizado.data_post).local().startOf('seconds').fromNow()}
                     navigation={props.navigation}
                 />
             )
         }
+
+        if(postagens.length == 0){
+            postagens.push(<View key={1} style={{marginTop: 80, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 18, color: '#333333', fontWeight: 'bold'}}>Ninguém postou nada nessa comunidade!</Text>
+                <Image
+                    source={require('../img/cryp_rain.png')} 
+                    style={{
+                        width: 160,
+                        height: 210,
+                        marginTop: 24,              
+                    }}
+                    resizeMode="cover"
+                />
+            </View>)
+        }
+
         return(
             <View style={{alignItems: 'center'}}>
                 { postagens }
@@ -144,31 +161,13 @@ export default props => {
         )
     }
 
-    const [tab, setTab] = useState("posts")
-    const [selecinado, setSelecionado] = useState("posts")
-    const PostAdd = _ => {
-
-        return(
-                <View style ={{ marginVertical: 16,  alignItems:'center', flex: 1}}>
-                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
-                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
-                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
-                    <Post postTitulo="Minha história" postDescricao="Hoje eu estava passeando e encontrei um cachorro, pe..." />
-                </View>
-        )
-    }
-    const EventoAdd = _ => {
-        return(
-            <View style={{ marginVertical: 16, alignItems:'center', flex: 1}}>
-                    <Evento />
-                    <Evento realizado={true}/>
-            </View>
-        )
-    }
-
     return(
         <>
-        <ScrollView>
+        <ScrollView refreshControl={
+            <RefreshControl
+                refreshing={refresh}
+                onRefresh={onRefresh}
+            />}>
             <Header navegacao={props.navigation} />
             <SafeAreaView style={[estilo.Flex1, {backgroundColor: '#f3f4f3'}]}>
                 <View>
@@ -201,20 +200,28 @@ export default props => {
                 </View>
                 <View style={style.ContainerDescricao}>
                     <View style={style.BotaoDescricao}>
-                        <Btn  
+                        {comu.id_ong != id_usu  ? 
+                            <Btn  
                             titulo={ingresso ? "Membro" : "Entrar"} 
                             funcaoPressionar={_ => toggleMembro()} 
                             tamanhoFonte={16} 
                             largura={120} 
                             altura={40}
                             desativado={id_usu == comu.id_ong ? true : false}/>
+                            :
+                            <Btn  
+                            titulo={"Editar"} 
+                            funcaoPressionar={() => props.navigation.navigate("EditarComunidade", {comu: comu})} 
+                            tamanhoFonte={16} 
+                            largura={120} 
+                            altura={40}/>}
                     </View>
                     <View style={style.TextoDescricao}>
-                        <Text style={{fontSize: 24,}}>
+                        <Text style={{fontSize: 24, fontWeight: 'bold', color: '#333333'}}>
                             {comu.nome_comu}
                         </Text>
-                        <Text style={{fontSize: 16}}>
-                            Criado por ONG Route
+                        <Text style={{fontSize: 16, color: '#333333'}}>
+                            Criado por {ong.nome_usu}
                         </Text>
                         <Text style={{
                             fontSize: 16,
@@ -232,17 +239,10 @@ export default props => {
                         <Text>
                             Posts
                         </Text>
-                        <View style={selecinado == "posts" ? { borderRadius: 100, height: 3, width: 16, backgroundColor: '#FEDB41'}: []}></View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{alignItems:'center'}} onPress={() =>{setTab("eventos"); setSelecionado("eventos")}}>
-                        <Text>
-                            Eventos
-                        </Text>
-                        <View style={selecinado == "eventos" ? { borderRadius: 100,height: 3, width: 16, backgroundColor: '#FEDB41'}: []}></View>
+                        <View style={{ borderRadius: 100, height: 3, width: 16, backgroundColor: '#FEDB41'}}></View>
                     </TouchableOpacity>
                 </View>
-                {tab == "posts" ? renderizarPosts() : []}
-                {tab == "eventos" ? EventoAdd() : []}
+                {renderizarPosts()}
             </SafeAreaView>
         </ScrollView>
         </>

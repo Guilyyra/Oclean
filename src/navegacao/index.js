@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Stack from './Stack';
 import Tab from './Tab';
 
+//console.disableYellowBox = true;
+
 export default props => (
     <SafeAreaView style={{flex: 1}}>
         <NavigationContainer >

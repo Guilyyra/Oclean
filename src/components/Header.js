@@ -13,7 +13,8 @@ export default props => (
             altura={24}
             svg={<MaterialIcons name="search" size={24} color="#333333" />}
             somenteTexto={true}
-            somenteSvg={true} />
+            somenteSvg={true} 
+            funcaoPressionar={() => { props.navegacao.navigate("Pesquisar") }}/>
             
         <Logo lado={40} />
             

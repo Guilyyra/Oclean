@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text, Image, Keyboard } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
+import { server, showError } from '../comum'
+
 import VoltarBtn from './VoltarBtn'
 import estilo from './estilo'
 import BtnImg from './BtnImg'
@@ -13,6 +15,8 @@ export default props => {
     const fechar = props.fechar || null
     const sin = props.sin || null
     const dono_limpo = props.dono_limpo || null
+
+    const ImgUserPlaceholder = `${server}/img/user_placeholder.png`
 
     const foto = { uri: sin.foto_limp.replace(/"/g, "") }
     const desc = sin.desc_limp
@@ -49,11 +53,12 @@ export default props => {
 
                     <View style={{width: '80%',flexDirection: 'row', alignItems: 'center', marginBottom: 16}}>
                         <Image 
-                            source={require('../img/oclean_logo.png')}
+                            source={{ uri: !dono_limpo.foto_perfil ? ImgUserPlaceholder : dono_limpo.foto_perfil.replace(/"/g, "")}}
                             style={{
                                 width: 30,
                                 height: 30,
                                 marginRight: 12,
+                                borderRadius: 15
                             }}
                             resizeMode="cover"
                         />

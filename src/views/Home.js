@@ -10,11 +10,6 @@ import Header from '../components/Header'
 import Post from '../components/Post'
 import Btn from '../components/Btn'
 
-import moment from 'moment';
-import "moment/min/locales";
-
-moment.locale('pt-br');
-
 export default  props => {
     // Apagar depois
     const imagem = `${server}/img/default.png`
@@ -73,23 +68,17 @@ export default  props => {
             // console.log(comunidade)
             postagens.push(
                 <Post key={postRenderizado.id_post} 
-                id_post={postRenderizado.id_post}
-                postTitulo={postRenderizado.titulo_post}
-                imgPost={{uri: postRenderizado.foto_post.replace(/"/g, "") }}
-                postDescricao={postRenderizado.descricao_post}
-                possuiImagem={possuiImagem}
-                nomeComunidade={postRenderizado.nome_comu}
-                funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
-                nomeUsuario={postRenderizado.nome_usu}
-                tempoAtras ={moment.utc(postRenderizado.data_post).local().startOf('seconds').fromNow()}
-                navigation={props.navigation}
+                    post={postRenderizado}
+                    possuiImagem={possuiImagem}
+                    funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: postRenderizado.nome_comu})}
+                    navigation={props.navigation}
                 />
             )
         }
 
         if(!postagens[0]){
             postagens.push(
-                <View key={1} style={{width: "100%", alignItems: "center"}}>
+                <View key={1} style={{width: "100%", marginTop: 40, alignItems: "center"}}>
                     <Text style={{fontSize: 28, textAlign: "center", fontWeight: "bold", color: "#333333"}}>
                         Você ainda não entrou em nenhuma comunidade!
                     </Text>
@@ -101,8 +90,8 @@ export default  props => {
                     <Image 
                         source={require('../img/cryp_dead.png')} 
                         style={{
-                            width: 200,
-                            height: 200,
+                            width: 160,
+                            height: 150,
                             marginTop: 24               
                         }}
                         resizeMode="cover"

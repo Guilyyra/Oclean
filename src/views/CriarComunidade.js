@@ -61,8 +61,8 @@ export default props => {
     const [nome, setNome] = useState("") // Comunidade das folhas
     const [descricao, setDescricao] = useState("") // Para amantes da briza do mar 🌴🍃🍀🌵, da conversação, da botânica e outros...
     const [erroNome, setErroNome] = useState("")
-    const [fotoBanner, setFotoBanner] = useState({ uri: `${server}/img/banner.png`})
-    const [fotoPerfil, setFotoPerfil] = useState({ uri: `${server}/img/perfil.png`})
+    const [fotoBanner, setFotoBanner] = useState({ uri: `${server}/img/placeholder.png`})
+    const [fotoPerfil, setFotoPerfil] = useState({ uri: `${server}/img/placeholder.png`})
     
 
     return(
@@ -103,7 +103,6 @@ export default props => {
                         resizeMode="cover" />
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
-                    <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
                     <BtnImg aspectoLargura={400} aspectoAltura={400} funcaoPressionar={result => setFotoPerfil(result)} />
                 </View>
 
@@ -121,7 +120,6 @@ export default props => {
                         resizeMode="cover" />
                 </View>
                 <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
-                    <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
                     <BtnImg aspectoLargura={1500} aspectoAltura={500} funcaoPressionar={result => setFotoBanner(result)} />
                 </View>
                 <View style={{alignSelf: "center", width: "50%"}}>

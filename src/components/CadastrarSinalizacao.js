@@ -16,7 +16,7 @@ export default props => {
     const funcaoVoltar = props.funcaoVoltar || null
     const funcaoTerminar = props.funcaoTerminar || null
 
-    const [foto, setFoto] = useState({ uri: `${server}/img/banner.png`})
+    const [foto, setFoto] = useState({ uri: `${server}/img/placeholder.png`})
     const [teclado, setTeclado] = useState(false)
     const [medidasTeclado, setMedidasTeclado] = useState({})
 
@@ -89,7 +89,6 @@ export default props => {
                             resizeMode="cover" />
                     </View>
                     <View style={{justifyContent: "center", flexDirection: "row", marginTop: 8}}>
-                        <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="white" />
                         <BtnImg cor="white" aspectoLargura={1500} aspectoAltura={500} funcaoPressionar={setFoto} />
                     </View>
                     

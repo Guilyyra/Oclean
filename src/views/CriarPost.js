@@ -126,7 +126,6 @@ export default props => {
 
                     </View>
                     <View style={{justifyContent: "center", flexDirection: "row", marginBottom: 16}}>
-                        <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
                         <BtnImg permitirEdicao={false} aspectoLargura={400} aspectoAltura={400} funcaoPressionar={async result => {
                             setFoto(result)
                             novaMedida(result)}}/>

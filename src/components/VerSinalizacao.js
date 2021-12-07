@@ -21,11 +21,15 @@ export default props => {
     const funcaoVoltar = props.funcaoVoltar || null
     const sin = props.sin
 
+    const ImgUserPlaceholder = `${server}/img/user_placeholder.png`
+
     const [dono, setDono] = useState({
-        nome_usu: "carregando..."
+        nome_usu: "carregando...",
+        foto_perfil: ''
     })
     const [donoLimpo, setDonoLimpo] = useState({
-        nome_usu: "carregando..."
+        nome_usu: "carregando...",
+        foto_perfil: ''
     })
 
     const [cadastrarLimp, setCadastrarLimp] = useState(false)
@@ -38,6 +42,7 @@ export default props => {
             if(sin.status_sin == "limpo"){
                 const dono = await axios.get(`${server}/usuarios/${sin.id_usu_limpo}`)
                 setDonoLimpo(dono.data[0])
+                console.log(dono.data[0])
             }
         }catch(erro){
             console.log(erro)
@@ -104,11 +109,12 @@ export default props => {
 
                 <View style={{width: '80%',flexDirection: 'row', alignItems: 'center'}}>
                     <Image 
-                        source={ImgPerfil}
+                        source={{ uri: !dono.foto_perfil ? ImgUserPlaceholder : dono.foto_perfil.replace(/"/g, "")}}
                         style={{
                             width: 30,
                             height: 30,
-                            marginRight: 12,               
+                            marginRight: 12,  
+                            borderRadius: 15             
                         }}
                         resizeMode="cover"
                     />
@@ -117,11 +123,12 @@ export default props => {
 
                 {sin.status_sin == "limpo" && <View style={{width: '80%',flexDirection: 'row', alignItems: 'center', marginTop: 16}}>
                     <Image 
-                        source={ImgPerfil}
+                        source={{ uri: !donoLimpo.foto_perfil ? ImgUserPlaceholder : donoLimpo.foto_perfil.replace(/"/g, "")}}
                         style={{
                             width: 30,
                             height: 30,
-                            marginRight: 12,               
+                            marginRight: 12,    
+                            borderRadius: 15           
                         }}
                         resizeMode="cover"
                     />

@@ -48,8 +48,8 @@ export default props => {
                 email_usu: email,
                 senha_usu: senha,
                 loc_usu: localizacao,
-                data_usu: data,
-                tipo_usu: "Pessoa"
+                nasc_usu: data,
+                tipo_usu: "Pessoa",
             })
             
             props.navigation.navigate("Login")

@@ -73,7 +73,6 @@ export default props => {
 
                     </View>
                     <View style={{justifyContent: "center", flexDirection: "row"}}>
-                        <MaterialIcons style={{marginHorizontal: 16}} name="photo-camera" size={24} color="#333333" />
                         <BtnImg permitirEdicao={true} aspectoLargura={400} aspectoAltura={150} funcaoPressionar={async result => {
                             setFoto(result)}}/>
                     </View>

@@ -50,7 +50,7 @@ export default props => {
                 senha_usu: senha,
                 loc_usu: endereco,
                 telefone_usu: telefone,
-                tipo_usu: "ONG"
+                tipo_usu: "ONG",
             })
             
             props.navigation.navigate("Login")

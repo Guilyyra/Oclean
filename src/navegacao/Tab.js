@@ -47,7 +47,7 @@ export default props => {
             })} initialRouteName="HomeStack" >
             <tab.Screen name="HomeStack" component={SubStack} initialParams={{ Tela: "Home", id_usu: id}} />
             <tab.Screen name="LixoStack" component={SubStack} initialParams={{ Tela: "Lixo", id_usu: props.route.params.id_usu}} />
-            <tab.Screen name="PerfilStack" component={SubStack} initialParams={{ Tela: "Perfil", id_usu: props.route.params.id_usu }} options={{unmountOnBlur: true}} />
+            <tab.Screen name="PerfilStack" component={SubStack} initialParams={{ Tela: "Perfil", id_usu: props.route.params.id_usu, id_usu_perfil: props.route.params.id_usu }} options={{unmountOnBlur: true}} />
         </tab.Navigator>
     )
 }
