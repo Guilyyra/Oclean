@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StatusBar } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { CommonActions } from '@react-navigation/routers'
 
@@ -29,16 +29,15 @@ export default props => {
     }
 
     return(
-        <View style={[estilo.Flex1, { justifyContent: 'center', alignItems: 'center'} ]} >
+        <View style={[estilo.Flex1, {marginTop: StatusBar.currentHeight + 16, justifyContent: 'center', alignItems: 'center'} ]} >
             <VoltarBtn 
-                        titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
-                        navegacao={props.navigation}
-                        style={estilo.VoltarBtn} />
+                titulo={<MaterialIcons name="arrow-back" size={18} color="#333333" />}
+                navegacao={props.navigation}
+                style={estilo.VoltarBtn} />
             <Btn 
                 titulo="Logout" 
                 largura="50%" 
                 funcaoPressionar={_ => logout()}/>
-            <Btn marginVertical={20} funcaoPressionar={_ => props.navigation.navigate("Comunidade", { nome_comu: "Comunidade%20das%20folhas"})} />
         </View>
     )
 }

@@ -152,13 +152,13 @@ export default props => {
                 </View>
                 <View style={style.ContainerDescricao}>
                     <View style={style.BotaoDescricao}>
-                        <Btn  
+                        {usu.id_usu == id_param && <Btn  
                             titulo={"Editar"} 
                             funcaoPressionar={_ => props.navigation.navigate("EditarUsuario", {usu: usu})} 
                             tamanhoFonte={16} 
                             largura={120} 
                             altura={40}
-                        />
+                        />}
                     </View>
                     <View style={style.TextoDescricao}>
                         <Text style={{fontSize: 24, fontWeight: 'bold', color: '#333333'}}>

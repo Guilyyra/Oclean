@@ -4,7 +4,7 @@
     "slug": "Oclean",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/oclean.png",
     "splash": {
       "image": "./src/img/splash.png",
       "resizeMode": "cover",

@@ -9,6 +9,7 @@ import estilo from '../components/estilo'
 import Header from '../components/Header'
 import Post from '../components/Post'
 import Btn from '../components/Btn'
+import CardComu from '../components/CardComu'
 
 export default  props => {
     // Apagar depois
@@ -50,8 +51,6 @@ export default  props => {
             showError(e)
         }
     }
-
-
         
     const renderizarPosts = () => {
 
@@ -84,7 +83,7 @@ export default  props => {
                     </Text>
                     <View style={{width: "80%"}}>
                         <Text style={{fontSize: 16, textAlign: "center", fontWeight: "100", color: "#333333"}}>
-                            Entre em alguma comunidade para conseguir ver posts de outras pessoas
+                            Pesquise e entre em alguma comunidade para conseguir ver posts de outras pessoas
                         </Text>
                     </View>
                     <Image 
@@ -96,23 +95,6 @@ export default  props => {
                         }}
                         resizeMode="cover"
                     />
-                    <View style={{width: "100%", alignItems: "flex-start", marginTop: 28}}>
-                        <Text style={{fontSize: 22, fontWeight: "bold", color: "#333333", marginLeft: 8}}>
-                            Sugestões de comunidades
-                        </Text>
-                        <View
-                            style={{
-                                width: "30%",
-                                height: 200,
-                                marginTop: 16,
-                                marginLeft: 8,
-                                borderStyle: "solid",
-                                borderColor: "black",
-                                borderWidth: 3,
-                                borderRadius: 30
-                            }}
-                        />
-                    </View> 
                 </View>
             )
         }

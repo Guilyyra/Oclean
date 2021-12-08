@@ -8,6 +8,7 @@ export default props => {
     const [provisorio, setProvisorio] = useState("Provisório")
     const valor = props.valor
     const setValor = props.setValor || setProvisorio
+    const autoFocus = props.autoFocus || false
 
     const largura = props.largura || "70%"
     const altura = props.altura || 40
@@ -36,6 +37,7 @@ export default props => {
                 placeholder = {placeholder}
                 value = {valor}
                 onChangeText = {input => {setValor(input)}}
+                autoFocus={autoFocus}
                 secureTextEntry = {escondido}
                 keyboardType = {tipoTeclado}
                 onFocus = {() => {
