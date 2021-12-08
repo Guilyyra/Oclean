@@ -50,10 +50,10 @@ export default props => {
                             height: 80,
                             marginTop: 25,
                             marginLeft: 16,
-                            borderRadius: 100   
+                            borderRadius: 100
                         }}
                     resizeMode="cover"/>
-                    <View style={{marginTop: 88, marginLeft: 16, marginBottom: 24}}>
+                    <View style={{width: '70%', marginTop: 88, marginLeft: 16, marginBottom: 24}}>
                         <Text style={{fontSize: 10, color: 'rgba(51, 51, 51, 0.75)'}}>Comunidade</Text>
                         <Text style={{fontSize: 14, fontWeight: 'bold', color: '#333333'}}>{comu.nome_comu}</Text>
                         <Text style={{fontSize: 12, color: '#333333'}}>{comu.descricao_comu}</Text>
