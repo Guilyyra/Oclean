@@ -1,41 +1,72 @@
 import React from 'react'
-import { Pressable, Text,  StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-const ImgLogo = require('../images/oclean_logo.png');
 
-export default ({ titulo }) => {
+export default props => {
+    /*  somenteText - Modifica a interface do Botão, mudando a cor de fundo, texto, etc
+        somenteSvg - Retira o Text, para botões que possuem apenas svg,
+        impedindo que o <Text> atrapalhe na formatação */
+    const somenteSvg = props.somenteSvg || false
+    const svg = props.svg || null
+    const svgEsquerda = props.svgEsquerda || 0
+    const svgAlignSelf = props.svgAlignSelf || null
+    const titulo = props.titulo || ""
+    const largura = props.largura || "70%"
+    const altura = props.altura || "auto"
+    const tamanhoFonte = props.tamanhoFonte || 24
+    const corFonte = props.corFonte || "white"
+    const funcaoPressionar = props.funcaoPressionar || null
+    const marginVertical = props.marginVertical || null
+    const marginHorizontal = props.marginHorizontal || null
+    const somenteTexto = props.somenteTexto || false
+    const borderRadius = props.borderRadius || 10
+    const estilo = props.estilo || {}
+    const desativado = props.desativado || false
 
+    const medidas = [{
+        width: largura,
+        height: altura,
+        marginVertical: marginVertical,
+        marginHorizontal: marginHorizontal,
+        borderRadius: borderRadius
+    },estilo]
+
+    const checarSvg = () => {
+        if(!somenteSvg){
+            return (
+                <Text 
+                    style={[{fontSize: tamanhoFonte}, 
+                    somenteTexto  ? {color: "#63E1FD"} : {color: corFonte}]}>
+                        {titulo}
+                </Text>
+            )
+        }
+    }
     return (
-        <Pressable style={style.btn}>
-            <Text style={style.titulo}>{titulo}</Text>
-        </Pressable>
+        <TouchableOpacity disabled={desativado} style={[somenteTexto ? style.btnTexto : style.btn,medidas ]} onPress={funcaoPressionar} >
+            {svg && 
+                <Text 
+                    style={[{ alignSelf: svgAlignSelf, marginLeft: svgEsquerda }, !somenteSvg ? {position: "absolute"} : {} ]}>
+                {svg}</Text>}
+            {checarSvg()}
+        </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    titulo: {
-        fontSize: 18,
-        color: "white"
-    },
     btn: {
-        width: "70%",
-        height: "10%",
-        marginTop: 40,
-        marginBottom: 8,
+        padding: 5,
         alignItems: "center",
         justifyContent: "center",
 
         backgroundColor: "#63E1FD",
-        borderRadius: 10,
-
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 11,
-        },
-        shadowOpacity: 0.57,
-        shadowRadius: 15.19,
-
-        elevation: 23
+        
+        elevation: 8,
+            
+    },
+    btnTexto: {
+        padding: 0,
+        alignItems: "center",
+        justifyContent: "center",
     }
 })
